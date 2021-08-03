@@ -12,7 +12,7 @@ using namespace std;
 
 class Niveles : public Escena {
 public:
-	Niveles(char Dificultad, char SPersonaje);
+	Niveles(char SDificultad, char SPersonaje);
 	Niveles();
 	~Niveles()override;
 	virtual void Actualizar (Juego & game);
@@ -24,6 +24,7 @@ protected:
 	View * m_camara1;
 	list<Personaje*> Malosmalosos;
 	vector<Objeto*> Objetos;
+	char Dificultad;
 	Clock TiempoTranscurrido;
 };
 

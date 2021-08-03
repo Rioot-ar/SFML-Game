@@ -3,7 +3,6 @@
 #include "Menu.h"
 #include "Mago.h"
 #include "Plataforma.h"
-#include <iostream>
 #include <list>
 #include "Castillo.h"
 #include "Puntaje.h"
@@ -21,18 +20,23 @@ void Niveles::Actualizar (Juego & game) {
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)){
 		game.SetEscena(new Menu);
 	}
-	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
+	
+	
+	
 	//Jugador 
 	///Visual
 	Jugador->Colision(Objetos);
 	Jugador->Movimiento();
 	m_camara1->setCenter(Jugador->ObtenerSprite().getPosition().x,TamanioVentana.y/2);
+	///Mouse Respecto al personaje
+	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
+	MousePoss.x=Jugador->ObtenerSprite().getPosition().x+MousePoss.x-TamanioVentana.x/2;
 
-	/// Interacciones
 
 	///Ataque
 	Jugador->VerificarDist(Vector2f(MousePoss));
 	Jugador->Atacar();
+	Jugador->habilidadEspecial();
 	///Daño 
 	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) { 
 		if((*it)->RecibirDanio(Jugador->ObtenerProyectil())){
@@ -50,7 +54,7 @@ void Niveles::Actualizar (Juego & game) {
 		(*it)->Movimiento();
 		(*it)->Atacar();
 		(*it)->ObtenerProyectil()->Movimiento();
-		///Si el Jugador Llega a 0 de Vida
+		///Si el Jugador Llega a 0 de Vida Terminar Partida
 		if(Jugador->RecibirDanio((*it)->ObtenerProyectil())){
 			game.SetEscena(new Puntaje(Jugador->consultarPuntos()));
 			break;
@@ -58,30 +62,34 @@ void Niveles::Actualizar (Juego & game) {
 	}
 
 
-	///Si el Jugador Llega al Final
+	///Objetos.size()-1 el ultimo objeto insertado es el destino del jugador
+	///CORREGIR, EN EL FINAL SE TERMINA EN LA PLATAFORMA
 	if(Jugador->ObtenerSprite().getGlobalBounds().intersects(Objetos[Objetos.size()-1]->ObtenerForma().getGlobalBounds())){
 		Termino=true;
 	}
 	
+	///Otro final posible es que el jugador haya limpiado el nivel
+	if(Malosmalosos.empty()){Termino=true;}
+	
 	if(Termino){
 		this->TerminarPartida(game);
+		Jugador=nullptr;
 	}
 }
 
 void Niveles::Dibujar (RenderWindow & Vent) {
 	Vent.clear(Color(200,150,255,255));
-	//View en el Personaje
-	Vent.setView(*m_camara1);
 	//Fondo
 	//Dibujo objetos
 	for(size_t i=0;i<Objetos.size();i++) { 
 		Vent.draw(Objetos[i]->ObtenerForma());
 	}
-
-	Vent.draw(Jugador->ObtenerProyectil()->ObtenerForma());
-
-	//Dibujo Jugador
-	Vent.draw(Jugador->ObtenerSprite());
+	//Jugador
+	if(Jugador){
+		Vent.setView(*m_camara1);
+		Vent.draw(Jugador->ObtenerProyectil()->ObtenerForma());
+		Vent.draw(Jugador->ObtenerSprite());
+	}
 	//Dibujo enemigos
 	for(list<Personaje*>::iterator it=Malosmalosos.begin();it!=Malosmalosos.end();++it) { 
 		Vent.draw((*it)->ObtenerSprite());
@@ -91,9 +99,10 @@ void Niveles::Dibujar (RenderWindow & Vent) {
 }
 
 Niveles::~Niveles ( ) {
-	Jugador= nullptr;
+	if(Jugador){
+		delete Jugador;
+	}
 	delete m_camara1;
-	delete Jugador;
 	delete fuente;
 	delete FlechaMenu;
 	for( Objeto *p:Objetos ) { 

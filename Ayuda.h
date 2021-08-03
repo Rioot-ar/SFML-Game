@@ -15,7 +15,6 @@ private:
 	Text ControlesTitulo, DificultadTitulo, PersonajesTitulo;
 	Text ControlesContenido, DificultadContenido, PersonajesContenido;
 	Texture Fondo;
-	Sprite Fondospr;
 };
 
 #endif

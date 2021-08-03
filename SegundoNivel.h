@@ -4,8 +4,8 @@
 
 class SegundoNivel : public Niveles {
 public:
-	SegundoNivel(Personaje* J);
-	void TerminarPartida(Juego & game);
+	SegundoNivel(char SDificultad, Personaje* J);
+	void TerminarPartida(Juego & game) override;
 private:
 };
 

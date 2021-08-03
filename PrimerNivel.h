@@ -3,8 +3,8 @@
 
 class PrimerNivel : public Niveles {
 public:
-	PrimerNivel(char Dificultad, char SPersonaje);
-	void TerminarPartida(Juego & game);
+	PrimerNivel(char SDificultad, char SPersonaje);
+	void TerminarPartida(Juego & game) override;
 private:
 };
 

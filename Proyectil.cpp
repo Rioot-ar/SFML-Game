@@ -18,9 +18,10 @@ Proyectil::Proyectil(float R, Texture* T,Vector2f V,Vector2f Pi,float D){
 }
 
 void Proyectil::Movimiento ( ) {
-	float DistR;
-	DistR = sqrt(pow(m_posicioninicial.x-m_sprite.getPosition().x,2)+pow(m_posicioninicial.y-m_sprite.getPosition().y,2));
-	if(DistR<m_rango){
+	float DistRecorrida;
+	DistRecorrida = sqrt(pow(m_posicioninicial.x-m_sprite.getPosition().x,2)+pow(m_posicioninicial.y-m_sprite.getPosition().y,2));
+	if(DistRecorrida<m_rango){
+		m_sprite.rotate(25);
 		m_sprite.move(m_velocidad);
 	}else{m_sprite=Sprite();}
 }

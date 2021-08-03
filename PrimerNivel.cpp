@@ -8,26 +8,29 @@
 #include "Puntaje.h"
 #include "SegundoNivel.h"
 #include "Personaje.h"
+#include "Caballero.h"
 
-PrimerNivel::PrimerNivel(char Dificultad, char SPersonaje) {
+PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
+	Dificultad=SDificultad;
 	//Dificultad, Define numero de enemigos, tiempo limite y tipo de enemigos
-	switch(Dificultad){
+	switch(SDificultad){
 	case 'N':
 		
 		break;
 	case 'D':
-		for(int i=1;i<10;i++) {  
-			Malosmalosos.push_back(new Enemigos(1,50,100,Vector2f(5,5),Vector2f(500*i,200)));
+		for(int i=2;i<3;i++) {  
+			Malosmalosos.push_back(new Enemigos(1,50,0,Vector2f(5,5),Vector2f(500*i,200)));
 		}
 		break;
 	}
+	
 	//Personaje, define las habilidades y la apariencia del jugador.
 	switch(SPersonaje){
 	case 'M':
 		Jugador = new Mago;
 		break;
 	case 'C':
-		/*Jugador = new Caballero;*/
+		Jugador = new Caballero;
 		break;
 	case 'H':
 		/*Jugador = new Cazador;*/
@@ -37,7 +40,7 @@ PrimerNivel::PrimerNivel(char Dificultad, char SPersonaje) {
 	
 	//Definir nivel: piso, plataformas.
 	
-	Objetos.push_back(new Plataforma(Vector2f(10000,50),Vector2f(20,600)));
+	Objetos.push_back(new Plataforma(Vector2f(10000,50),Vector2f(-20,600)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(100,500)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(200,440)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(400,300)));
@@ -50,8 +53,8 @@ PrimerNivel::PrimerNivel(char Dificultad, char SPersonaje) {
 
 
 void PrimerNivel::TerminarPartida (Juego & game) {
-	Jugador->consultarPuntos()+=Jugador->consultarPuntos()+100;
-	Personaje* J = Jugador;
-	game.SetEscena(new SegundoNivel(J));
+	Jugador->consultarPuntos()=Jugador->consultarPuntos()+100;
+	game.SetEscena(new SegundoNivel(Dificultad,Jugador));
+	
 }
 

@@ -1,7 +1,6 @@
 #ifndef MAGO_H
 #define MAGO_H
 #include "Personaje.h"
-#include <vector>
 #include "Proyectil.h"
 using namespace std;
 
@@ -15,7 +14,8 @@ public:
 	void VerificarDist(Vector2f Per);
 
 private:
-	float Pendiente, DistAPers,DirecionX;
+	float VelProyectil;
+	Texture* AtaqueEspecial;
 };
 
 #endif
