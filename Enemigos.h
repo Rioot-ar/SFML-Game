@@ -8,10 +8,11 @@ public:
 	bool Atacar ( )override;
 	void Movimiento ()override;
 	void VerificarDist(Vector2f Per)override;
+	void habilidadEspecial()override;
 	~Enemigos()override;
 private:
 	bool PerEstaEnRango;
-	float Pendiente, DistAPers,DirecionX;
+	float VelProyectil;
 };
 
 #endif

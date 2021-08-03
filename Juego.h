@@ -10,10 +10,10 @@ public:
 	Juego();
 	void Run();
 	void SetEscena(Escena *nueva);
-	RenderWindow Ventana;
 	~Juego();
-	Event e;
+	RenderWindow Ventana;
 private:
+	Event e;
 	Escena *Actual;
 	Escena *m_siguiente_escena = nullptr;
 };

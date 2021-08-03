@@ -4,8 +4,8 @@
 
 class Final : public Niveles {
 public:
-	Final();
-	void TerminarPartida(Juego & game);
+	Final(char SDificultad, Personaje* J);
+	void TerminarPartida(Juego & game)override;
 private:
 };
 

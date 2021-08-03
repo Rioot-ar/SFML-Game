@@ -7,52 +7,61 @@ Ayuda::Ayuda() {
 	
 	//Texto Controles--------------------------------
 	ControlesTitulo.setFont(*fuente);
-	ControlesTitulo.setCharacterSize(55);
+	ControlesTitulo.setCharacterSize(35);
 	ControlesTitulo.setString("Controles\n");
 
 	
 	ControlesContenido.setFont(*fuente);
-	ControlesContenido.setCharacterSize(45);
-	ControlesContenido.setString("Para Saltar Presione    W\n\nPara Moverse Utilize Las Teclas    A y S\n\nPara Atacar Presione Espacio\n\nPara Utilizar La Habilidad Especial Presione Q");
+	ControlesContenido.setCharacterSize(25);
+	ControlesContenido.setString("Para saltar presione    W\n\nPara moverse utilize las teclas    A y S\n\nPara atacar presione espacio\n\nPara utilizar la habilidad especial presione Q\n\nPara volver al menu presione escape");
 
 	
 	//Texto Dificultad---------------------------------------
 	DificultadTitulo.setFont(*fuente);
-	DificultadTitulo.setCharacterSize(55);
+	DificultadTitulo.setCharacterSize(35);
 	DificultadTitulo.setString("Dificultad\n");
 
 	
 	DificultadContenido.setFont(*fuente);
-	DificultadContenido.setCharacterSize(45);
-	DificultadContenido.setString("Nada Aun");
+	DificultadContenido.setCharacterSize(25);
+	DificultadContenido.setString("En la dificultad normal los enemigos son mas debiles y menos numerosos,\nel numero de puntos recibidos por terminar un nivel es menor\n\nEn dificil hay mayor cantidad y variedad de enemigos, que ademas son\nmas fuertes ");
 
 	
 	//Texto Personajes---------------------------
 	PersonajesTitulo.setFont(*fuente);
-	PersonajesTitulo.setCharacterSize(55);
+	PersonajesTitulo.setCharacterSize(35);
 	PersonajesTitulo.setString("Personajes\n");
 
 	
 	PersonajesContenido.setFont(*fuente);
-	PersonajesContenido.setCharacterSize(45);
-	PersonajesContenido.setString("Caballero: Aguanta mucho\n\nCazador: Pega rapido\n\nMago: Pega fuerte");
+	PersonajesContenido.setCharacterSize(25);
+	PersonajesContenido.setString("Caballero: Personaje con mayor salud y defensa, su habilidad especial\nle cura completamente y lo hace intocable durante 10 segundos\n\nCazador: Personaje equilibrado en su ataque y defensa, su habilidad\nespecial aumenta su daño y su velocidad de ataque\n\nMago: Personaje con mayor daño y poco aguante, su habilidad especial\nconsiste en un ataque en area con un daño elevado");
 
 	
 }
 void Ayuda::Actualizar (Juego & game) {
+	
 	TamanioVentana = Vector2f(game.Ventana.getSize());
 	game.Ventana.setView(View(Vector2f(TamanioVentana.x/2,TamanioVentana.y/2),TamanioVentana));
 	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
 	Rect<float> mouse(MousePoss.x,MousePoss.y,1,1);
+	
 	//Actualizar Textos------------------------------------------------
 	ControlesTitulo.setPosition(0,0);
 	ControlesContenido.setPosition(0,TamanioVentana.y*0.1);
+	ControlesTitulo.setCharacterSize(TamanioVentana.x*0.04);
+	ControlesContenido.setCharacterSize(TamanioVentana.x*0.03);
 	
 	DificultadTitulo.setPosition(TamanioVentana.x*0.35,0);
+	DificultadTitulo.setCharacterSize(TamanioVentana.x*0.04);
+	DificultadContenido.setCharacterSize(TamanioVentana.x*0.03);
 	DificultadContenido.setPosition(0,TamanioVentana.y*0.1);
 	
 	PersonajesTitulo.setPosition(TamanioVentana.x*0.65,0);
+	PersonajesTitulo.setCharacterSize(TamanioVentana.x*0.04);
+	PersonajesContenido.setCharacterSize(TamanioVentana.x*0.03);
 	PersonajesContenido.setPosition(0,TamanioVentana.y*0.1);
+	
 	
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)){
 		game.SetEscena(new Menu);

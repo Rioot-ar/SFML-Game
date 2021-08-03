@@ -11,6 +11,10 @@ struct Puntos{
 	char Nombre[20];
 	int Puntuacion;
 };
+
+///Por el momento creo una ventana nueva "w". Buscar solucion para que los eventos se procesen.
+
+
 class Puntaje : public Escena {
 public:
 	Puntaje(int PP);
@@ -24,7 +28,7 @@ private:
 	int m_Puntos;
 	vector<Puntos> m_tPuntos;
 	RenderWindow *w;
-	Text IngrN, SusP, MostrarPuntuaciones, TituloPuntuaciones;
+	Text IngrN, SusP, MostrarNPuntuaciones, TituloPuntuaciones, MostrarPuntuaciones;
 };
 
 #endif

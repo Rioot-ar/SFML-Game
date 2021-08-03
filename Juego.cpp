@@ -6,8 +6,8 @@
 #include "Puntaje.h"
 using namespace std;
 using namespace sf;
-Juego::Juego() : Ventana(VideoMode(800,600),"Despacito 2.exe"){
-	Ventana.setFramerateLimit(60);
+Juego::Juego() : Ventana(VideoMode(800,600),"Desterraria"){
+	Ventana.setFramerateLimit(80);
 	Actual = new Menu;
 	m_siguiente_escena = nullptr;
 }
@@ -27,6 +27,7 @@ void Juego::Run(){
 			Actual=m_siguiente_escena;
 			m_siguiente_escena= nullptr;
 		}
+
 	}
 }
 void Juego::SetEscena(Escena *nueva){
