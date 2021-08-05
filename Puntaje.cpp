@@ -89,7 +89,7 @@ void CargarPuntaje(string Nom, int &P, vector<Puntos> &v, Text &N,Text &Pu) {
 	string Nomb="";
 	for(size_t i=0;i<v.size();i++) {  
 		int aux=v[i].Puntuacion;
-		Nomb=Nomb+"\n"+Agr.Nombre;
+		Nomb=Nomb+"\n"+v[i].Nombre;
 		Pun=Pun+"\n"+to_string(aux);
 	}
 	N.setString(Nomb);

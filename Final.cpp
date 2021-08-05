@@ -10,6 +10,7 @@ Final::Final(char SDificultad, Personaje* J) {
 	Objetos.push_back(new Plataforma(Vector2f(10000,50),Vector2f(20,600)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(400,500)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(600,500)));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1200,500)));
 
 	
 	//Jefe
@@ -19,7 +20,7 @@ Final::Final(char SDificultad, Personaje* J) {
 		break;
 	case 'D':
 		for(int i=2;i<3;i++) {  
-			Malosmalosos.push_back(new Enemigos(1,50,100,Vector2f(5,5),Vector2f(500,200)));
+			Malosmalosos.push_back(new Enemigos(1,50,100,Vector2f(5,0),Vector2f(500,200)));
 		}
 		break;
 	}

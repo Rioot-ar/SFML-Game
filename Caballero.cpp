@@ -4,13 +4,14 @@
 Caballero::Caballero() {
 	Apariencia->loadFromFile("Recursos/Caballero.png");
 	m_sprite.setTexture(*Apariencia);
-	m_sprite.setOrigin(m_sprite.getGlobalBounds().width,m_sprite.getGlobalBounds().height/2);
+	m_sprite.setOrigin(m_sprite.getGlobalBounds().width/2.f,m_sprite.getGlobalBounds().height/2.f);
 	m_sprite.setPosition(0,200);
 	m_sprite.setScale(0.3,0.3);
 	m_ataque->loadFromFile("Recursos/AtaqueCaba.png");
 
 	
 	//Normas
+	velEst=1.5;
 	Velocidad.x=1.5;
 	Velocidad.y=0;
 	Posicion=m_sprite.getPosition();

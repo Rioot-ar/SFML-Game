@@ -10,7 +10,7 @@ public:
 	~Mago()override;
 	void habilidadEspecial  ( )override;
 	bool Atacar ( )override;
-	void Movimiento  ( )override;
+	void Movimiento  (  )override;
 	void VerificarDist(Vector2f Per);
 
 private:

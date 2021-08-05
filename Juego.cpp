@@ -7,7 +7,7 @@
 using namespace std;
 using namespace sf;
 Juego::Juego() : Ventana(VideoMode(800,600),"Desterraria"){
-	Ventana.setFramerateLimit(80);
+	Ventana.setFramerateLimit(60);
 	Actual = new Menu;
 	m_siguiente_escena = nullptr;
 }

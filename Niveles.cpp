@@ -20,6 +20,7 @@ void Niveles::Actualizar (Juego & game) {
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)){
 		game.SetEscena(new Menu);
 	}
+	m_camara1->setCenter(Jugador->ObtenerSprite().getPosition().x,Jugador->ObtenerSprite().getPosition().y);
 	
 	
 	
@@ -27,10 +28,10 @@ void Niveles::Actualizar (Juego & game) {
 	///Visual
 	Jugador->Colision(Objetos);
 	Jugador->Movimiento();
-	m_camara1->setCenter(Jugador->ObtenerSprite().getPosition().x,TamanioVentana.y/2);
 	///Mouse Respecto al personaje
 	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
 	MousePoss.x=Jugador->ObtenerSprite().getPosition().x+MousePoss.x-TamanioVentana.x/2;
+	MousePoss.y=Jugador->ObtenerSprite().getPosition().y+MousePoss.y-TamanioVentana.y/2;
 
 
 	///Ataque
@@ -38,17 +39,24 @@ void Niveles::Actualizar (Juego & game) {
 	Jugador->Atacar();
 	Jugador->habilidadEspecial();
 	///Daño 
-	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) { 
+	
+//	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) { 
+//		if((*it)->RecibirDanio(Jugador->ObtenerProyectil())){
+//			Jugador->consultarPuntos()+=Jugador->consultarPuntos()+(*it)->consultarPuntos();
+//			delete *it;
+//			it=Malosmalosos.erase(it);
+//		}
+//	}	
+//	Jugador->ObtenerProyectil()->Movimiento();
+
+	///Enemigos
+	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) {
 		if((*it)->RecibirDanio(Jugador->ObtenerProyectil())){
 			Jugador->consultarPuntos()+=Jugador->consultarPuntos()+(*it)->consultarPuntos();
 			delete *it;
 			it=Malosmalosos.erase(it);
+			continue;
 		}
-	}	
-	Jugador->ObtenerProyectil()->Movimiento();
-
-	///Enemigos
-	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) {
 		(*it)->Colision(Objetos);
 		(*it)->VerificarDist(Jugador->ObtenerSprite().getPosition());
 		(*it)->Movimiento();
@@ -60,7 +68,7 @@ void Niveles::Actualizar (Juego & game) {
 			break;
 		}
 	}
-
+	Jugador->ObtenerProyectil()->Movimiento();
 
 	///Objetos.size()-1 el ultimo objeto insertado es el destino del jugador
 	///CORREGIR, EN EL FINAL SE TERMINA EN LA PLATAFORMA

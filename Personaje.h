@@ -25,10 +25,10 @@ public:
 protected:
 	Texture* Apariencia, *m_ataque;
 	Sprite m_sprite;
-	float Salud, Defensa, Danio, Salto, Pendiente, DistAPers,DirecionX;
+	float Salud, Defensa, Danio, Salto, Pendiente, DistAPers,DirecionX,velEst;
 	Vector2f Posicion,Velocidad;
-	bool Parado, Obstaculo;
-	Clock m_puedeatk;
+	bool Parado, ObstaculoDe,ObstaculoIz;
+	Clock m_puedeatk,timer;
 	Proyectil m_proyectil;
 	int puntos, PuntosdHabilidad;
 	

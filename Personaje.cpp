@@ -7,7 +7,8 @@ Personaje::Personaje() {
 	Apariencia=new Texture; 
 	m_ataque=new Texture;
 	Parado=false;
-	Obstaculo=false;
+	ObstaculoDe=false;
+	ObstaculoIz=false;
 }
 
 void Personaje::habilidadEspecial(){
@@ -21,26 +22,22 @@ void Personaje::Movimiento(){
 ///Verifica si el Personaje esta chocando contra un objeto
 void Personaje::Colision(vector<Objeto*> Ob){
 	Parado = false;
-	Obstaculo = false;
+	ObstaculoDe=false;
+	ObstaculoIz=false;
 	
 	///Hitbox del jugador
-	FloatRect CuaJuR(m_sprite.getGlobalBounds().left+m_sprite.getGlobalBounds().width+1.0,m_sprite.getGlobalBounds().top,1.0,m_sprite.getGlobalBounds().height);
-	FloatRect CuaJuL(m_sprite.getGlobalBounds().left-1.0,m_sprite.getGlobalBounds().top,1.0,m_sprite.getGlobalBounds().height);
-	FloatRect CuaJuT(m_sprite.getGlobalBounds().left,m_sprite.getGlobalBounds().top-1.0,m_sprite.getGlobalBounds().width,Salto/2);
-	
+	FloatRect CuaJuR(m_sprite.getGlobalBounds().left+m_sprite.getGlobalBounds().width+1.0,m_sprite.getGlobalBounds().top,-5.0,m_sprite.getGlobalBounds().height);
+	FloatRect CuaJuL(m_sprite.getGlobalBounds().left-1.0,m_sprite.getGlobalBounds().top,-5.0,m_sprite.getGlobalBounds().height);
+	FloatRect CuaJuT(m_sprite.getGlobalBounds().left,m_sprite.getGlobalBounds().top-1.0,m_sprite.getGlobalBounds().width,-5.f);
+		
 	for(size_t i=0;i<Ob.size();i++) {
 		///Hitbox del objeto
-		FloatRect CuadObT(Ob[i]->ObtenerForma().getGlobalBounds().left,Ob[i]->ObtenerForma().getGlobalBounds().top,Ob[i]->ObtenerForma().getGlobalBounds().width,4);;		
-		FloatRect CuadObL(Ob[i]->ObtenerForma().getGlobalBounds().left-1.0,Ob[i]->ObtenerForma().getGlobalBounds().top,1,Ob[i]->ObtenerForma().getGlobalBounds().height);
-		FloatRect CuadObR(Ob[i]->ObtenerForma().getGlobalBounds().left+Ob[i]->ObtenerForma().getGlobalBounds().width+1,Ob[i]->ObtenerForma().getGlobalBounds().top,1.0,Ob[i]->ObtenerForma().getGlobalBounds().height);
-		FloatRect CuadObB(Ob[i]->ObtenerForma().getGlobalBounds().left,Ob[i]->ObtenerForma().getGlobalBounds().top+Ob[i]->ObtenerForma().getGlobalBounds().height+1.0,Ob[i]->ObtenerForma().getGlobalBounds().width,Salto/2);
-		
 		///verifica si esta parado sobre algun objeto
-		if(m_sprite.getGlobalBounds().intersects(CuadObT)){
+		if(m_sprite.getGlobalBounds().intersects(Ob[i]->CuadObT)){
 			Velocidad.y=0;
 			Parado = true;
 		}
-		if(CuaJuT.intersects(CuadObB)){
+		if(m_sprite.getGlobalBounds().intersects(Ob[i]->CuadObB)){
 			Velocidad.y=0;
 			Velocidad.y+=9.8/60;
 			m_sprite.setPosition(Posicion);
@@ -48,14 +45,20 @@ void Personaje::Colision(vector<Objeto*> Ob){
 		}
 		
 		///verifica si hay un obstaculo delante
-		if(CuaJuR.intersects(CuadObL)|| CuaJuL.intersects(CuadObR)){
-			Velocidad.x=0;
-			Obstaculo=true;
+		if(CuaJuR.intersects(Ob[i]->CuadObL)){
+			Velocidad.x=-Velocidad.x;
+			m_sprite.setPosition(Posicion);
+			ObstaculoDe=true;
+			Velocidad.x=velEst;
+		}else if(CuaJuL.intersects(Ob[i]->CuadObR)){
+			Velocidad.x=+Velocidad.x;
+			m_sprite.setPosition(Posicion);
+			ObstaculoIz=true;
+			Velocidad.x=velEst;
 		}
 	}
 	
 	
-	if(!Obstaculo){Velocidad.x=2;}
 	
 	///Gravedad
 	if(!Parado){

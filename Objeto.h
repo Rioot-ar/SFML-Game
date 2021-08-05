@@ -5,10 +5,12 @@ using namespace sf;
 class Objeto {
 public:
 	Objeto();
-	RectangleShape ObtenerForma(){return Forma;};
+	FloatRect CuadObT,CuadObL,CuadObR,CuadObB;
+	RectangleShape ObtenerForma(){return Forma;}
 	virtual ~Objeto();
 protected:
 	RectangleShape Forma;
+
 	Texture* Apariencia;
 };
 

@@ -10,7 +10,8 @@ Vector2f CalcularVelocidads(float Pend, float VELP,int DIR) {
 }
 
 Enemigos::Enemigos(float Sa, float De, float Da, Vector2f Ve, Vector2f pos){
-
+	
+	velEst=Ve.x;
 	Salud=Sa;
 	Defensa=De;
 	Danio=Da;
@@ -21,10 +22,11 @@ Enemigos::Enemigos(float Sa, float De, float Da, Vector2f Ve, Vector2f pos){
 	puntos = 12;
 	
 	m_ataque->loadFromFile("Recursos/ataque.png");
-	Apariencia->loadFromFile("Recursos/Enemigo2.png");
+	Apariencia->loadFromFile("Recursos/Personajes/Enemigo2.png");
 	m_sprite.setTexture(*Apariencia);
+	m_sprite.setTextureRect(IntRect(0,0,86,109));
 	m_sprite.setOrigin(m_sprite.getGlobalBounds().width,m_sprite.getGlobalBounds().height/2);
-	m_sprite.setScale(0.5,0.5);
+	m_sprite.setScale(0.3,0.3);
 	m_sprite.setPosition(Posicion);
 
 }
@@ -36,7 +38,7 @@ void Enemigos::VerificarDist (Vector2f Per) {
 	DistAPers=sqrt(pow(Per.x-m_sprite.getPosition().x,2)+pow(Per.y-m_sprite.getPosition().y,2));
 	
 	
-	if(DistAPers<=200.f){
+	if(DistAPers<=200.f&&DistAPers>=50.f){
 		PerEstaEnRango = true;
 	}else{PerEstaEnRango = false;}
 	
@@ -47,12 +49,6 @@ void Enemigos::VerificarDist (Vector2f Per) {
 		DirecionX=-1;
 		Pendiente*=-1.f;
 	}
-	
-	if((Per.x-m_sprite.getPosition().x)<=0){
-		if(Velocidad.x>=0){Velocidad.x=-1*Velocidad.x;}
-	}else{
-		if(Velocidad.x<=0){Velocidad.x=-1*Velocidad.x;}
-	}
 }
 
 
@@ -61,15 +57,42 @@ bool Enemigos::Atacar ( ) {
 		if(this->PuedeAtacar()){
 			Vector2f MovProyectil=CalcularVelocidads(Pendiente,VelProyectil,DirecionX);
 			m_proyectil=Proyectil(200.f,m_ataque,Vector2f(MovProyectil),Vector2f(m_sprite.getPosition().x+2,m_sprite.getPosition().y),Danio);
+			if(DirecionX>0){m_sprite.setTextureRect(IntRect(86,0,86,109));}else{m_sprite.setTextureRect(IntRect(86*4,109,86,109));}
 			return true;
 		}
 		
 	}else{return false;}
 }
 void Enemigos::Movimiento(){
+
 	if(PerEstaEnRango){
-		Posicion.x+=Velocidad.x;
-		m_sprite.setPosition(Posicion);
+		if(!ObstaculoDe&&DirecionX<0){
+			if(timer.getElapsedTime().asSeconds()<=0.3){
+				m_sprite.setTextureRect(IntRect(0,109,86,109));
+			}else if(timer.getElapsedTime().asSeconds()<=0.8 && timer.getElapsedTime().asSeconds()>0.3){
+				m_sprite.setTextureRect(IntRect(86*1,109,86,109));
+			}
+			else{
+				m_sprite.setTextureRect(IntRect(86*2,109,86,109));
+				if(timer.getElapsedTime().asSeconds()>=1.3){timer.restart();}
+			}
+			Posicion.x+=Velocidad.x*DirecionX;
+			m_sprite.setPosition(Posicion);
+		}
+		
+		if(!ObstaculoIz&&DirecionX>0){
+			if(timer.getElapsedTime().asSeconds()<=0.3){
+				m_sprite.setTextureRect(IntRect(86*2,0,86,109));
+			}else if(timer.getElapsedTime().asSeconds()<=0.8 && timer.getElapsedTime().asSeconds()>0.3){
+				m_sprite.setTextureRect(IntRect(86*3,0,86,109));
+			}
+			else{
+				m_sprite.setTextureRect(IntRect(86*4,0,86,109));
+				if(timer.getElapsedTime().asSeconds()>=1.3){timer.restart();}
+			}
+			Posicion.x+=Velocidad.x*DirecionX;
+			m_sprite.setPosition(Posicion);
+		}
 		
 	}
 }

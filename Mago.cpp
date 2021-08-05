@@ -1,6 +1,8 @@
 #include "Mago.h"
 #include "Proyectil.h"
 #include <cmath>
+#include <cstdlib>
+#include <iostream>
 using namespace std;
 
 Vector2f CalcularVelocidad(float Pend, float VELP,int DIR) {
@@ -13,17 +15,20 @@ Vector2f CalcularVelocidad(float Pend, float VELP,int DIR) {
 
 Mago::Mago() {
 	//Visual
-	Apariencia->loadFromFile("Recursos/Mago.png");
+	Apariencia->loadFromFile("Recursos/Personajes/Mago.png");
 	m_sprite.setTexture(*Apariencia);
-	m_sprite.setOrigin(m_sprite.getGlobalBounds().width,m_sprite.getGlobalBounds().height/2);
+	m_sprite.setTextureRect(IntRect(0,0,86,109));
+	//m_sprite.setOrigin(m_sprite.getGlobalBounds().width/2.f,m_sprite.getGlobalBounds().height/2.f);
 	m_sprite.setPosition(0,200);
 	m_sprite.setScale(0.3,0.3);
 	m_ataque->loadFromFile("Recursos/ataque.png");
+	
 	
 	AtaqueEspecial = new Texture;
 	AtaqueEspecial->loadFromFile("Recursos/ataqueesp.png");
 	
 	//Normas
+	velEst=2;
 	Velocidad.x=2;
 	Velocidad.y=0;
 	Posicion=m_sprite.getPosition();
@@ -33,7 +38,7 @@ Mago::Mago() {
 	Salto = 5;
 	puntos=0;
 	PuntosdHabilidad = 1;
-	VelProyectil=10;
+	VelProyectil=5;
 	
 }
 
@@ -53,20 +58,44 @@ bool Mago::Atacar ( ) {
 	if(Keyboard::isKeyPressed(Keyboard::Key::Space)){
 		Vector2f MovProyectil=CalcularVelocidad(Pendiente,VelProyectil,DirecionX);// Esto se hace para que el proyectil se mueva siempre a la misma velocidad
 		if(this->PuedeAtacar()){			
-			m_proyectil = Proyectil(200.f,m_ataque,Vector2f(MovProyectil),Vector2f(m_sprite.getPosition().x+2,m_sprite.getPosition().y),Danio);
+			m_proyectil = Proyectil(200.f,m_ataque,Vector2f(MovProyectil),Vector2f(Posicion.x+m_sprite.getGlobalBounds().width/2.f,Posicion.y+m_sprite.getGlobalBounds().height/2.f),Danio);
+			if(DirecionX>0){m_sprite.setTextureRect(IntRect(86,0,86,109));}else{m_sprite.setTextureRect(IntRect(86*4,109,86,109));}
 			return true;
 		}
 	}else{return false;}
 }
 
 void Mago::Movimiento () {
+
 	if(Keyboard::isKeyPressed(Keyboard::Key::D)){
-		Posicion.x+=Velocidad.x;
-		m_sprite.setPosition(Posicion);
+		if(!ObstaculoDe){
+			if(timer.getElapsedTime().asSeconds()<=0.3){
+				m_sprite.setTextureRect(IntRect(86*2,0,86,109));
+			}else if(timer.getElapsedTime().asSeconds()<=0.8 && timer.getElapsedTime().asSeconds()>0.3){
+				m_sprite.setTextureRect(IntRect(86*3,0,86,109));
+			}
+			else{
+				m_sprite.setTextureRect(IntRect(86*4,0,86,109));
+				if(timer.getElapsedTime().asSeconds()>=1.3){timer.restart();}
+			}
+			Posicion.x+=Velocidad.x;
+			m_sprite.setPosition(Posicion);
+		}
 	}
 	if(Keyboard::isKeyPressed(Keyboard::Key::A)){
-		Posicion.x-=Velocidad.x;
-		m_sprite.setPosition(Posicion);
+		if(!ObstaculoIz){
+			if(timer.getElapsedTime().asSeconds()<=0.3){
+				m_sprite.setTextureRect(IntRect(0,109,86,109));
+			}else if(timer.getElapsedTime().asSeconds()<=0.8 && timer.getElapsedTime().asSeconds()>0.3){
+				m_sprite.setTextureRect(IntRect(86*1,109,86,109));
+			}
+			else{
+				m_sprite.setTextureRect(IntRect(86*2,109,86,109));
+				if(timer.getElapsedTime().asSeconds()>=1.3){timer.restart();}
+			}
+			Posicion.x-=Velocidad.x;
+			m_sprite.setPosition(Posicion);
+		}
 	}
 	
 	if(Parado){

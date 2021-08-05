@@ -19,7 +19,7 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 		break;
 	case 'D':
 		for(int i=2;i<3;i++) {  
-			Malosmalosos.push_back(new Enemigos(1,50,0,Vector2f(5,5),Vector2f(500*i,200)));
+			Malosmalosos.push_back(new Enemigos(1,50,0,Vector2f(2,5),Vector2f(500*i,200)));
 		}
 		break;
 	}
@@ -40,7 +40,7 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	
 	//Definir nivel: piso, plataformas.
 	
-	Objetos.push_back(new Plataforma(Vector2f(10000,50),Vector2f(-20,600)));
+	Objetos.push_back(new Plataforma(Vector2f(10000,50),Vector2f(-20,550)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(100,500)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(200,440)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(400,300)));

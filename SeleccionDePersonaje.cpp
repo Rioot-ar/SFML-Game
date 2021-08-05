@@ -19,8 +19,9 @@ SeleccionDePersonaje::SeleccionDePersonaje() {
 
 	
 	//Mago-------------------------------------------------
-	t_Mago.loadFromFile("Recursos/Mago.png");
+	t_Mago.loadFromFile("Recursos/Personajes/Mago.png");
 	m_Mago.setTexture(t_Mago);
+	m_Mago.setTextureRect(IntRect(0,0,86,109));
 	m_Mago.setScale(0.5,0.5);
 	
 	TMago.setFont(*fuente);

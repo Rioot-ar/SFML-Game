@@ -5,6 +5,7 @@ using namespace sf;
 class Plataforma : public Objeto {
 public:
 	Plataforma(Vector2f Tamanio, Vector2f Posicion);
+
 	~Plataforma();
 private:
 };
