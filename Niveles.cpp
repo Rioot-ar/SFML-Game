@@ -6,6 +6,7 @@
 #include <list>
 #include "Castillo.h"
 #include "Puntaje.h"
+#include <iostream>
 using namespace std;
 
 
@@ -20,20 +21,19 @@ void Niveles::Actualizar (Juego & game) {
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)){
 		game.SetEscena(new Menu);
 	}
-	m_camara1->setCenter(Jugador->ObtenerSprite().getPosition().x,Jugador->ObtenerSprite().getPosition().y);
+	m_camara1->setCenter(Jugador->ObtenerSprite().getPosition().x,m_camara1->getCenter().y);
 	
 	
-	
+	FondoE->setScale(1,TamanioVentana.y/FondoEscena->getSize().y);
 	//Jugador 
 	///Visual
 	Jugador->Colision(Objetos);
 	Jugador->Movimiento();
 	///Mouse Respecto al personaje
 	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
-	MousePoss.x=Jugador->ObtenerSprite().getPosition().x+MousePoss.x-TamanioVentana.x/2;
-	MousePoss.y=Jugador->ObtenerSprite().getPosition().y+MousePoss.y-TamanioVentana.y/2;
-
-
+	MousePoss.x=(MousePoss.x-TamanioVentana.x/2);
+	MousePoss.y=Jugador->ObtenerSprite().getPosition().y-600*MousePoss.y/TamanioVentana.y;
+	//cout<<"( "<<MousePoss.x<<" , "<<MousePoss.y<<" )"<<endl;
 	///Ataque
 	Jugador->VerificarDist(Vector2f(MousePoss));
 	Jugador->Atacar();
@@ -78,6 +78,8 @@ void Niveles::Actualizar (Juego & game) {
 	
 	///Otro final posible es que el jugador haya limpiado el nivel
 	if(Malosmalosos.empty()){Termino=true;}
+	///Se cae del mapa
+	if(Jugador->ObtenerSprite().getPosition().y>600){Jugador->Matar();Termino=true;}
 	
 	if(Termino){
 		this->TerminarPartida(game);
@@ -88,6 +90,7 @@ void Niveles::Actualizar (Juego & game) {
 void Niveles::Dibujar (RenderWindow & Vent) {
 	Vent.clear(Color(200,150,255,255));
 	//Fondo
+	Vent.draw(*FondoE);
 	//Dibujo objetos
 	for(size_t i=0;i<Objetos.size();i++) { 
 		Vent.draw(Objetos[i]->ObtenerForma());

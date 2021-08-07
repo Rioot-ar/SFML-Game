@@ -5,7 +5,7 @@ Castillo::Castillo(Vector2f Posicion, Vector2f Tamanio) {
 	Apariencia->loadFromFile("Recursos/castillo.png");
 	
 	Forma.setSize(Tamanio);
-	Forma.setOrigin(Forma.getGlobalBounds().width/2.f,Forma.getGlobalBounds().height/2.f);
+	Forma.setOrigin(Forma.getGlobalBounds().width/2.f,Forma.getGlobalBounds().height);
 	Forma.setPosition(Posicion);
 	Forma.setTexture(Apariencia);
 	

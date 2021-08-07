@@ -11,6 +11,14 @@ using namespace sf;
 SeleccionDePersonaje::SeleccionDePersonaje() {
 	TamanioVentana = {800,600};
 	
+	FondoEscena= new Texture;
+	FondoE= new Sprite;
+	FondoEscena->loadFromFile("Recursos/FondoSe.jpg");
+	
+	FondoE->setTexture(*FondoEscena);
+	FondoE->setPosition(0,0);
+	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
+	
 	//Titulo 1----------------------------------------------
 	Seleccion.setFont(*fuente);
 	Seleccion.setString("Selecciona Tu Clase");
@@ -84,6 +92,7 @@ SeleccionDePersonaje::SeleccionDePersonaje() {
 void SeleccionDePersonaje::Actualizar(Juego &game){
 	TamanioVentana = Vector2f(game.Ventana.getSize());
 	game.Ventana.setView(View(Vector2f(TamanioVentana.x/2,TamanioVentana.y/2),TamanioVentana));
+	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
 	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
 	Rect<float> mouse(MousePoss.x,MousePoss.y,1,1);
 	bool Cambiarescena=false;
@@ -194,7 +203,9 @@ void SeleccionDePersonaje::Actualizar(Juego &game){
 }
 	}
 void SeleccionDePersonaje::Dibujar(RenderWindow &Vent){
+	
 	Vent.clear(Color(0,0,0,255));
+	Vent.draw(*FondoE);
 	Vent.draw(Seleccion);
 	Vent.draw(TMago);
 	Vent.draw(m_Mago);

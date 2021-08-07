@@ -20,6 +20,7 @@ Enemigos::Enemigos(float Sa, float De, float Da, Vector2f Ve, Vector2f pos){
 	VelProyectil=5;
 	PerEstaEnRango=false;
 	puntos = 12;
+	VelocidadAtaque=2;
 	
 	m_ataque->loadFromFile("Recursos/ataque.png");
 	Apariencia->loadFromFile("Recursos/Personajes/Enemigo2.png");

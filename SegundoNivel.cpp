@@ -3,8 +3,18 @@
 #include "Plataforma.h"
 #include "Castillo.h"
 #include "Final.h"
+#include "Puntaje.h"
 
 SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
+	
+	FondoEscena= new Texture;
+	FondoE= new Sprite;
+	FondoEscena->loadFromFile("Recursos/FondoNivel.png");
+	
+	FondoE->setTexture(*FondoEscena);
+	FondoE->setOrigin(0,FondoE->getGlobalBounds().height);
+	FondoE->setScale(1,TamanioVentana.y/FondoEscena->getSize().y);
+	
 	J->VolverInicio();
 	Jugador = J;
 	Dificultad=SDificultad;
@@ -25,13 +35,21 @@ SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 		break;
 	}
 	
+	FondoE->setPosition(-200,600);
 	m_camara1 = new View;
 	m_camara1->setSize(800.f,600.f);
+	m_camara1->setCenter(0,300);
 }
 
 
 void SegundoNivel::TerminarPartida (Juego & game) {
-	Jugador->consultarPuntos()+=Jugador->consultarPuntos()+200;
-	game.SetEscena(new Final(Dificultad,Jugador));
+	
+	if(Jugador->ObtenerSalud()!=0){
+		Jugador->consultarPuntos()+=200;
+		game.SetEscena(new Final(Dificultad,Jugador));
+	}else{
+		game.SetEscena(new Puntaje(Jugador->consultarPuntos()));
+	}
+	
 }
 

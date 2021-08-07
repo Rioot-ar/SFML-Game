@@ -13,13 +13,13 @@ Juego::Juego() : Ventana(VideoMode(800,600),"Desterraria"){
 }
 void Juego::Run(){
 	while(Ventana.isOpen()) {
-
+		
+		Actual->Actualizar(*this);
 		while(Ventana.pollEvent(e)) {
 			if(e.type == Event::Closed){
 				Ventana.close();	
 			}
 		}		
-		Actual->Actualizar(*this);
 		Actual->Dibujar(Ventana);
 		
 		if(m_siguiente_escena){

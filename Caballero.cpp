@@ -21,6 +21,7 @@ Caballero::Caballero() {
 	Salto = 5;
 	puntos=0;
 	PuntosdHabilidad = 1;
+	VelocidadAtaque=1;
 	habilidadActivada=false;
 }
 
@@ -62,10 +63,10 @@ void Caballero::Movimiento ( ) {
 
 
 void Caballero::VerificarDist (Vector2f Per) {
-	if(Per.x-Posicion.x>=0){
+	if(Per.x>=0){
 		DirecionX=1;
 	}
-	if(Per.x-Posicion.x<0){
+	if(Per.x<0){
 		DirecionX=-1;
 	}
 	
@@ -74,7 +75,7 @@ void Caballero::VerificarDist (Vector2f Per) {
 bool Caballero::Atacar ( ) {
 	if(Keyboard::isKeyPressed(Keyboard::Key::Space)){
 		if(this->PuedeAtacar()){			
-			m_proyectil = Proyectil(50.f,m_ataque,Vector2f(0,m_sprite.getGlobalBounds().height),Vector2f(m_sprite.getPosition().x,m_sprite.getPosition().y),Danio);
+			m_proyectil = Proyectil(0.f,m_ataque,Vector2f(0,m_sprite.getGlobalBounds().height),Vector2f(m_sprite.getPosition().x,m_sprite.getPosition().y),Danio);
 			return true;
 		}
 	}else{return false;}

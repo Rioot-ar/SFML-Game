@@ -18,7 +18,7 @@ Mago::Mago() {
 	Apariencia->loadFromFile("Recursos/Personajes/Mago.png");
 	m_sprite.setTexture(*Apariencia);
 	m_sprite.setTextureRect(IntRect(0,0,86,109));
-	//m_sprite.setOrigin(m_sprite.getGlobalBounds().width/2.f,m_sprite.getGlobalBounds().height/2.f);
+	m_sprite.setOrigin(m_sprite.getGlobalBounds().width/2.f,m_sprite.getGlobalBounds().height/2.f);
 	m_sprite.setPosition(0,200);
 	m_sprite.setScale(0.3,0.3);
 	m_ataque->loadFromFile("Recursos/ataque.png");
@@ -38,7 +38,8 @@ Mago::Mago() {
 	Salto = 5;
 	puntos=0;
 	PuntosdHabilidad = 1;
-	VelProyectil=5;
+	VelProyectil=10;
+	VelocidadAtaque=2;
 	
 }
 
@@ -58,7 +59,7 @@ bool Mago::Atacar ( ) {
 	if(Keyboard::isKeyPressed(Keyboard::Key::Space)){
 		Vector2f MovProyectil=CalcularVelocidad(Pendiente,VelProyectil,DirecionX);// Esto se hace para que el proyectil se mueva siempre a la misma velocidad
 		if(this->PuedeAtacar()){			
-			m_proyectil = Proyectil(200.f,m_ataque,Vector2f(MovProyectil),Vector2f(Posicion.x+m_sprite.getGlobalBounds().width/2.f,Posicion.y+m_sprite.getGlobalBounds().height/2.f),Danio);
+			m_proyectil = Proyectil(200.f,m_ataque,Vector2f(MovProyectil),m_sprite.getPosition(),Danio);
 			if(DirecionX>0){m_sprite.setTextureRect(IntRect(86,0,86,109));}else{m_sprite.setTextureRect(IntRect(86*4,109,86,109));}
 			return true;
 		}
@@ -114,14 +115,11 @@ Mago::~Mago ( ) {
 
 //determina direccion y pendiente del ataque.
 void Mago::VerificarDist (Vector2f Per) {
-	Pendiente = (Per.y-m_sprite.getPosition().y) / (Per.x-m_sprite.getPosition().x);
-	if(Per.x-Posicion.x>=0){
-		DirecionX=1;
-	}
-	if(Per.x-Posicion.x<0){
-		DirecionX=-1;
-		Pendiente*=-1;
-	}
+	Pendiente = (Per.y) / (Per.x);
+	if(Per.x>=0){DirecionX=1;}
+	if(Per.x<0){DirecionX=-1;}
+	if(Per.y>=0 && Per.x>=0){Pendiente*=-1;}
+	if(Per.y<=0 && Per.x>=0){Pendiente*=-1;}
 	
 	
 }

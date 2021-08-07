@@ -10,8 +10,6 @@ public:
 	void Dibujar(RenderWindow &Vent)override;
 	~Menu()override;
 private:
-	Texture* FondoMenu;
-	Sprite* FondoM, *FlechaM;
 	Text Titulo,MenuInicio,MenuOpciones,MenuPuntajes;
 };
 

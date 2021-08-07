@@ -27,7 +27,6 @@ private:
 	fstream Ar;
 	int m_Puntos;
 	vector<Puntos> m_tPuntos;
-	RenderWindow *w;
 	Text IngrN, SusP, MostrarNPuntuaciones, TituloPuntuaciones, MostrarPuntuaciones;
 };
 

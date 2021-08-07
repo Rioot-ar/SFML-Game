@@ -10,6 +10,7 @@ public:
 	Juego();
 	void Run();
 	void SetEscena(Escena *nueva);
+	Event *ObtenerEvento(){return &e;}
 	~Juego();
 	RenderWindow Ventana;
 private:

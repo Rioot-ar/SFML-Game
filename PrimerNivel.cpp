@@ -11,6 +11,15 @@
 #include "Caballero.h"
 
 PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
+	
+	FondoEscena= new Texture;
+	FondoE= new Sprite;
+	FondoEscena->loadFromFile("Recursos/FondoNivel.png");
+	
+	FondoE->setTexture(*FondoEscena);
+	FondoE->setOrigin(0,FondoE->getGlobalBounds().height);
+	FondoE->setScale(1,TamanioVentana.y/FondoEscena->getSize().y);
+	
 	Dificultad=SDificultad;
 	//Dificultad, Define numero de enemigos, tiempo limite y tipo de enemigos
 	switch(SDificultad){
@@ -19,7 +28,7 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 		break;
 	case 'D':
 		for(int i=2;i<3;i++) {  
-			Malosmalosos.push_back(new Enemigos(1,50,0,Vector2f(2,5),Vector2f(500*i,200)));
+			Malosmalosos.push_back(new Enemigos(1,50,0,Vector2f(1,5),Vector2f(500*i,200)));
 		}
 		break;
 	}
@@ -41,20 +50,29 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	//Definir nivel: piso, plataformas.
 	
 	Objetos.push_back(new Plataforma(Vector2f(10000,50),Vector2f(-20,550)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(100,500)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(200,440)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(400,300)));
-	Objetos.push_back(new Castillo(Vector2f(800,300),Vector2f(100,400)));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(20,300)));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(50,250)));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(75,200)));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(100,150)));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(125,100)));
+	Objetos.push_back(new Castillo(Vector2f(800,550),Vector2f(100,550)));
+	
+	FondoE->setPosition(-500,600);
+	
 	
 	m_camara1 = new View;
 	m_camara1->setSize(800.f,600.f);
+	m_camara1->setCenter(0,300);
 	
 }
 
 
 void PrimerNivel::TerminarPartida (Juego & game) {
-	Jugador->consultarPuntos()=Jugador->consultarPuntos()+100;
-	game.SetEscena(new SegundoNivel(Dificultad,Jugador));
-	
+	if(Jugador->ObtenerSalud()!=0){
+		Jugador->consultarPuntos()+=100;
+		game.SetEscena(new SegundoNivel(Dificultad,Jugador));
+	}else{
+		game.SetEscena(new Puntaje(Jugador->consultarPuntos()));
+	}
 }
 

@@ -10,9 +10,12 @@ public:
 	virtual void Dibujar(RenderWindow &Vent) = 0;
 	virtual ~Escena()=0;
 protected:
+	Sprite* FondoE, *FlechaM;
 	Font* fuente;
 	Vector2f TamanioVentana;
 	Texture* FlechaMenu;
+	Texture* FondoEscena;
+	Event* e;
 };
 
 #endif

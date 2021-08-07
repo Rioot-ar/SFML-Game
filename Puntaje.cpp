@@ -4,6 +4,7 @@
 #include <cstring>
 #include <fstream>
 #include "Menu.h"
+#include <SFML/Window/Event.hpp>
 using namespace std;
 using namespace sf;
 
@@ -11,8 +12,14 @@ using namespace sf;
 
 
 Puntaje::Puntaje(int PP): m_entrada(*fuente)  {
+	FondoEscena= new Texture;
+	FondoE= new Sprite;
+	FondoEscena->loadFromFile("Recursos/FondoFinal.jpg");
 	
-	w=new RenderWindow(VideoMode(800,600),"Nuevo Juego");
+	FondoE->setTexture(*FondoEscena);
+	FondoE->setPosition(0,0);
+	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
+	
 	m_Puntos=PP;
 	IngrN.setFont(*fuente);
 	IngrN.setCharacterSize(50);
@@ -97,35 +104,44 @@ void CargarPuntaje(string Nom, int &P, vector<Puntos> &v, Text &N,Text &Pu) {
 }
 
 void Puntaje::Actualizar (Juego & game) {
+
 	TamanioVentana = Vector2f(game.Ventana.getSize());
 	game.Ventana.setView(View(Vector2f(TamanioVentana.x/2,TamanioVentana.y/2),TamanioVentana));
-	w->setView(game.Ventana.getView());
-	
-	TamanioVentana = Vector2f(w->getSize());
+	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
+	e=game.ObtenerEvento();
 	///m_Puntos es el entero recibido en el constructor, indica los puntos que hizo el jugador. En el caso de que m_Puntos = 0 solo se tienen que mostrar los puntajes.
 	if(m_Puntos>0){
 		IngrN.setPosition(Vector2f( TamanioVentana.x/2,TamanioVentana.y*0.20));
 		SusP.setPosition(Vector2f( TamanioVentana.x/2,0 ));
 		m_entrada.setOrigin(m_entrada.getGlobalBounds().width,0);
 		m_entrada.setPosition(TamanioVentana.x/2,TamanioVentana.y*0.5);	
-		Event e;
-		while(w->pollEvent(e)){
-			if (e.type==Event::KeyPressed && e.key.code==Keyboard::Return) { 
+		
+		
+		while(game.Ventana.pollEvent(*e)) {
+			if (e->type==Event::KeyPressed && e->key.code==Keyboard::Return) {
+				
 				m_Nombre=m_entrada.getValue();
 				m_entrada.reset();
 				CargarPuntaje(m_Nombre,m_Puntos,m_tPuntos,MostrarNPuntuaciones,MostrarPuntuaciones);
-			} else {m_entrada.processEvent(e);}
-		}
+			} else {m_entrada.processEvent(*e);}
+		}		
+		
+
 		m_entrada.update();
 	}else{
-		/*
+		
 		TituloPuntuaciones.setCharacterSize(TamanioVentana.x*0.062);
-		MostrarNPuntuaciones.setCharacterSize(TamanioVentana.x*0.025);
-		MostrarPuntuaciones.setCharacterSize(TamanioVentana.x*0.025);
-		*/
+		TituloPuntuaciones.setOrigin(TituloPuntuaciones.getGlobalBounds().width/2,0);
+		
+		MostrarNPuntuaciones.setCharacterSize(TamanioVentana.x*0.028);
+		MostrarNPuntuaciones.setOrigin(MostrarNPuntuaciones.getGlobalBounds().width/2,0);
+		
+		MostrarPuntuaciones.setCharacterSize(TamanioVentana.x*0.028);
+		MostrarPuntuaciones.setOrigin(MostrarPuntuaciones.getGlobalBounds().width/2,0);
+		
 		TituloPuntuaciones.setPosition(Vector2f( TamanioVentana.x/2,0));
-		MostrarNPuntuaciones.setPosition(Vector2f( 0,TamanioVentana.y*0.20 ));
-		MostrarPuntuaciones.setPosition(Vector2f( TamanioVentana.x/2,TamanioVentana.y*0.20 ));
+		MostrarNPuntuaciones.setPosition(Vector2f( TamanioVentana.x*0.25,TamanioVentana.y*0.20 ));
+		MostrarPuntuaciones.setPosition(Vector2f( TamanioVentana.x*0.75,TamanioVentana.y*0.20 ));
 	}
 	
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)){
@@ -134,18 +150,19 @@ void Puntaje::Actualizar (Juego & game) {
 }
 
 void Puntaje::Dibujar (RenderWindow & Vent) {
-	w->clear(Color(40,25,0,255));
+	Vent.clear(Color(40,25,0,255));
+	Vent.draw(*FondoE);
 	if(m_Puntos>0){
-		w->draw(IngrN);
-		w->draw(m_entrada);
-		w->draw(SusP);
+		Vent.draw(IngrN);
+		Vent.draw(m_entrada);
+		Vent.draw(SusP);
 	}else{
-		w->draw(TituloPuntuaciones);
-		w->draw(MostrarNPuntuaciones);
-		w->draw(MostrarPuntuaciones);
+		Vent.draw(TituloPuntuaciones);
+		Vent.draw(MostrarNPuntuaciones);
+		Vent.draw(MostrarPuntuaciones);
 	}
 
-	w->display();
+	Vent.display();
 }
 
 Puntaje::~Puntaje() {
@@ -156,6 +173,5 @@ Puntaje::~Puntaje() {
 		Ar.write(reinterpret_cast<char*>(&aux),sizeof(aux));
 	}
 	Ar.close();
-	delete w;
 }
 

@@ -4,10 +4,19 @@
 #include "Puntaje.h"
 
 Final::Final(char SDificultad, Personaje* J) {
+	
+	FondoEscena= new Texture;
+	FondoE= new Sprite;
+	FondoEscena->loadFromFile("Recursos/FondoNivel.png");
+	
+	FondoE->setTexture(*FondoEscena);
+	FondoE->setOrigin(0,FondoE->getGlobalBounds().height);
+	FondoE->setScale(1,TamanioVentana.y/FondoEscena->getSize().y);
+	
 	Jugador= J;
 	Dificultad=SDificultad;
 	//Objetos
-	Objetos.push_back(new Plataforma(Vector2f(10000,50),Vector2f(20,600)));
+	Objetos.push_back(new Plataforma(Vector2f(10000,50),Vector2f(20,550)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(400,500)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(600,500)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1200,500)));
@@ -27,13 +36,14 @@ Final::Final(char SDificultad, Personaje* J) {
 	
 
 	
-
+	FondoE->setPosition(-200,600);
 	m_camara1 = new View;
 	m_camara1->setSize(800.f,600.f);
+	m_camara1->setCenter(0,300);
 }
 
 void Final::TerminarPartida (Juego & game) {
-	Jugador->consultarPuntos()+=Jugador->consultarPuntos()+400;
+	Jugador->consultarPuntos()+=400;
 	game.SetEscena(new Puntaje(Jugador->consultarPuntos()));
 	
 }

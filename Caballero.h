@@ -12,7 +12,7 @@ public:
 	void VerificarDist (Vector2f Per);
 	bool Atacar ( );
 private:
-	Clock HAbInven;
+	Clock HAbInven, AnimAtaque;;
 	bool habilidadActivada;
 };
 

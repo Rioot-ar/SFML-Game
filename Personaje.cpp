@@ -85,7 +85,7 @@ bool Personaje::RecibirDanio (Proyectil *D) {
 
 ///Verifica tiempo entre ataques
 bool Personaje::PuedeAtacar ( ) {
-	if(m_puedeatk.getElapsedTime().asSeconds()>=1.5){
+	if(m_puedeatk.getElapsedTime().asSeconds()>=VelocidadAtaque){
 		m_puedeatk.restart();
 		return true;
 	}else{ return false;}
