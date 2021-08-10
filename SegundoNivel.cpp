@@ -22,7 +22,7 @@ SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(100,500)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(200,440)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(400,300)));
-	Objetos.push_back(new Castillo(Vector2f(800,300),Vector2f(100,400)));
+	Objetos.push_back(new Castillo(Vector2f(400,200),Vector2f(5000,552)));
 	
 	switch(Dificultad){
 	case 'N':
@@ -35,7 +35,7 @@ SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 		break;
 	}
 	
-	FondoE->setPosition(-200,600);
+	FondoE->setPosition(-600,600);
 	m_camara1 = new View;
 	m_camara1->setSize(800.f,600.f);
 	m_camara1->setCenter(0,300);
@@ -44,7 +44,7 @@ SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 
 void SegundoNivel::TerminarPartida (Juego & game) {
 	
-	if(Jugador->ObtenerSalud()!=0){
+	if(Jugador->ObtenerSalud()>0){
 		Jugador->consultarPuntos()+=200;
 		game.SetEscena(new Final(Dificultad,Jugador));
 	}else{

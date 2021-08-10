@@ -13,6 +13,7 @@ Final::Final(char SDificultad, Personaje* J) {
 	FondoE->setOrigin(0,FondoE->getGlobalBounds().height);
 	FondoE->setScale(1,TamanioVentana.y/FondoEscena->getSize().y);
 	
+	J->VolverInicio();
 	Jugador= J;
 	Dificultad=SDificultad;
 	//Objetos
@@ -36,7 +37,7 @@ Final::Final(char SDificultad, Personaje* J) {
 	
 
 	
-	FondoE->setPosition(-200,600);
+	FondoE->setPosition(-600,600);
 	m_camara1 = new View;
 	m_camara1->setSize(800.f,600.f);
 	m_camara1->setCenter(0,300);

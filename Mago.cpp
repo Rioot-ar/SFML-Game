@@ -82,8 +82,7 @@ void Mago::Movimiento () {
 			Posicion.x+=Velocidad.x;
 			m_sprite.setPosition(Posicion);
 		}
-	}
-	if(Keyboard::isKeyPressed(Keyboard::Key::A)){
+	}else if(Keyboard::isKeyPressed(Keyboard::Key::A)){
 		if(!ObstaculoIz){
 			if(timer.getElapsedTime().asSeconds()<=0.3){
 				m_sprite.setTextureRect(IntRect(0,109,86,109));
@@ -97,10 +96,8 @@ void Mago::Movimiento () {
 			Posicion.x-=Velocidad.x;
 			m_sprite.setPosition(Posicion);
 		}
-	}
-	
-	if(Parado){
-		if(Keyboard::isKeyPressed(Keyboard::Key::W)){
+	}else if(Keyboard::isKeyPressed(Keyboard::Key::W)){
+		if(Parado){
 			Velocidad.y=-Salto;
 			Posicion.y+=Velocidad.y;
 			m_sprite.setPosition(Posicion);

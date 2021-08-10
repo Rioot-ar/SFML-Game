@@ -50,14 +50,14 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	//Definir nivel: piso, plataformas.
 	
 	Objetos.push_back(new Plataforma(Vector2f(10000,50),Vector2f(-20,550)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(20,300)));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(100,475)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(50,250)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(75,200)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(100,150)));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(125,100)));
-	Objetos.push_back(new Castillo(Vector2f(800,550),Vector2f(100,550)));
+	Objetos.push_back(new Castillo(Vector2f(400,200),Vector2f(5000,552)));
 	
-	FondoE->setPosition(-500,600);
+	FondoE->setPosition(-600,600);
 	
 	
 	m_camara1 = new View;
@@ -68,7 +68,7 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 
 
 void PrimerNivel::TerminarPartida (Juego & game) {
-	if(Jugador->ObtenerSalud()!=0){
+	if(Jugador->ObtenerSalud()>0){
 		Jugador->consultarPuntos()+=100;
 		game.SetEscena(new SegundoNivel(Dificultad,Jugador));
 	}else{

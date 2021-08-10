@@ -38,7 +38,8 @@ SeleccionDePersonaje::SeleccionDePersonaje() {
 
 	
 	//Caballero-------------------------------------------
-	t_Caballero.loadFromFile("Recursos/Caballero.png");
+	t_Caballero.loadFromFile("Recursos/Personajes/Caballero.png");
+	m_Caballero.setTextureRect(IntRect(0,0,86,109));
 	m_Caballero.setTexture(t_Caballero);
 	m_Caballero.setScale(0.5,0.5);
 

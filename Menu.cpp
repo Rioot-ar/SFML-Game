@@ -35,7 +35,10 @@ Menu::Menu(){
 	CargarTexto(MenuOpciones, 30, "Ayuda",Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0.5),*fuente );
 	CargarTexto(MenuPuntajes, 30, "Puntajes",Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0.75),*fuente );
 	
-
+	MusicaPrincipal.openFromFile("Recursos/MenuP.ogg");
+	MusicaPrincipal.setLoop(true);
+	MusicaPrincipal.setVolume(50);
+	MusicaPrincipal.play();
 	
 	FlechaM->setTexture(*FlechaMenu);
 	FlechaM->setOrigin(FlechaM->getGlobalBounds().height,FlechaM->getGlobalBounds().height/2.f);

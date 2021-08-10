@@ -6,7 +6,6 @@
 #include <list>
 #include "Castillo.h"
 #include "Puntaje.h"
-#include <iostream>
 using namespace std;
 
 
@@ -15,7 +14,6 @@ Niveles::Niveles (char Dificultad, char SPersonaje) {
 }
 
 void Niveles::Actualizar (Juego & game) {
-
 	//salir al menu
 	TamanioVentana = Vector2f(game.Ventana.getSize());
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)){
@@ -85,6 +83,7 @@ void Niveles::Actualizar (Juego & game) {
 		this->TerminarPartida(game);
 		Jugador=nullptr;
 	}
+
 }
 
 void Niveles::Dibujar (RenderWindow & Vent) {

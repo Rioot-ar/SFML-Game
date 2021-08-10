@@ -1,6 +1,7 @@
 #ifndef ESCENA_H
 #define ESCENA_H
 #include "Juego.h"
+#include <SFML/Audio.hpp>
 class Juego;
 using namespace sf;
 class Escena {
@@ -16,6 +17,8 @@ protected:
 	Texture* FlechaMenu;
 	Texture* FondoEscena;
 	Event* e;
+	
+	Music MusicaPrincipal;
 };
 
 #endif
