@@ -4,15 +4,15 @@
 
 class Enemigos : public Personaje {
 public:
-	Enemigos(float Sa, float De, float Da, Vector2f Ve, Vector2f pos);
+	Enemigos();
 	bool Atacar ( )override;
 	void Movimiento ()override;
 	void VerificarDist(Vector2f Per)override;
 	void habilidadEspecial()override;
 	~Enemigos()override;
-private:
-	bool PerEstaEnRango;
-	float VelProyectil;
+protected:
+	bool PersonajeVisto;
+	float VelProyectil, RangoVision,RangoAtaque;
 };
 
 #endif

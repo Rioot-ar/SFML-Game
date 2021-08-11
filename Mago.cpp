@@ -5,12 +5,7 @@
 #include <iostream>
 using namespace std;
 
-Vector2f CalcularVelocidad(float Pend, float VELP,int DIR) {
-	Vector2f Vec;
-	Vec.x=cos(atan(Pend))*VELP*DIR;
-	Vec.y=sin(atan(Pend))*VELP;
-	return Vec;
-}
+
 
 
 Mago::Mago() {
@@ -22,7 +17,6 @@ Mago::Mago() {
 	m_sprite.setPosition(0,200);
 	m_sprite.setScale(0.3,0.3);
 	m_ataque->loadFromFile("Recursos/ataque.png");
-	
 	
 	AtaqueEspecial = new Texture;
 	AtaqueEspecial->loadFromFile("Recursos/ataqueesp.png");
@@ -58,7 +52,7 @@ void Mago::habilidadEspecial ( ) {
 bool Mago::Atacar ( ) {
 	if(Keyboard::isKeyPressed(Keyboard::Key::Space)){
 		Vector2f MovProyectil=CalcularVelocidad(Pendiente,VelProyectil,DirecionX);// Esto se hace para que el proyectil se mueva siempre a la misma velocidad
-		if(this->PuedeAtacar()){			
+		if(this->PuedeAtacar()){	
 			m_proyectil = Proyectil(200.f,m_ataque,Vector2f(MovProyectil),m_sprite.getPosition(),Danio);
 			if(DirecionX>0){m_sprite.setTextureRect(IntRect(86,0,86,109));}else{m_sprite.setTextureRect(IntRect(86*4,109,86,109));}
 			return true;
@@ -70,33 +64,34 @@ void Mago::Movimiento () {
 
 	if(Keyboard::isKeyPressed(Keyboard::Key::D)){
 		if(!ObstaculoDe){
-			if(timer.getElapsedTime().asSeconds()<=0.3){
+			if(timer.getElapsedTime().asSeconds()<=0.2){
 				m_sprite.setTextureRect(IntRect(86*2,0,86,109));
-			}else if(timer.getElapsedTime().asSeconds()<=0.8 && timer.getElapsedTime().asSeconds()>0.3){
+			}else if(timer.getElapsedTime().asSeconds()<=0.4 && timer.getElapsedTime().asSeconds()>0.2){
 				m_sprite.setTextureRect(IntRect(86*3,0,86,109));
 			}
 			else{
 				m_sprite.setTextureRect(IntRect(86*4,0,86,109));
-				if(timer.getElapsedTime().asSeconds()>=1.3){timer.restart();}
+				if(timer.getElapsedTime().asSeconds()>=0.6){timer.restart();}
 			}
 			Posicion.x+=Velocidad.x;
 			m_sprite.setPosition(Posicion);
 		}
 	}else if(Keyboard::isKeyPressed(Keyboard::Key::A)){
 		if(!ObstaculoIz){
-			if(timer.getElapsedTime().asSeconds()<=0.3){
+			if(timer.getElapsedTime().asSeconds()<=0.2){
 				m_sprite.setTextureRect(IntRect(0,109,86,109));
-			}else if(timer.getElapsedTime().asSeconds()<=0.8 && timer.getElapsedTime().asSeconds()>0.3){
+			}else if(timer.getElapsedTime().asSeconds()<=0.4 && timer.getElapsedTime().asSeconds()>0.2){
 				m_sprite.setTextureRect(IntRect(86*1,109,86,109));
 			}
 			else{
 				m_sprite.setTextureRect(IntRect(86*2,109,86,109));
-				if(timer.getElapsedTime().asSeconds()>=1.3){timer.restart();}
+				if(timer.getElapsedTime().asSeconds()>=0.6){timer.restart();}
 			}
 			Posicion.x-=Velocidad.x;
 			m_sprite.setPosition(Posicion);
 		}
-	}else if(Keyboard::isKeyPressed(Keyboard::Key::W)){
+	}
+	if(Keyboard::isKeyPressed(Keyboard::Key::W)){
 		if(Parado){
 			Velocidad.y=-Salto;
 			Posicion.y+=Velocidad.y;

@@ -1,8 +1,12 @@
 #include "Personaje.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
+#include <cmath>
+#include <iostream>
 using namespace std;
 using namespace sf;
+
+
 Personaje::Personaje() {
 	Apariencia=new Texture; 
 	m_ataque=new Texture;
@@ -97,5 +101,13 @@ Personaje::~Personaje ( ) {
 
 void Personaje::VerificarDist (Vector2f Per) {
 
+}
+
+
+Vector2f Personaje::CalcularVelocidad (float Pend, float VELP, int DIR) {
+	Vector2f Vec;
+	Vec.x=cos(atan(Pend))*VELP*DIR;
+	Vec.y=sin(atan(Pend))*VELP;
+	return Vec;
 }
 

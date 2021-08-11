@@ -67,6 +67,11 @@ Puntaje::Puntaje(int PP): m_entrada(*fuente)  {
 	
 	MostrarPuntuaciones.setString(Pun);
 	MostrarNPuntuaciones.setString(Nom);
+	
+	MusicaPrincipal.openFromFile("Recursos/Puntajes.ogg");
+	MusicaPrincipal.setLoop(true);
+	MusicaPrincipal.setVolume(50);
+	MusicaPrincipal.play();
 }
 
 

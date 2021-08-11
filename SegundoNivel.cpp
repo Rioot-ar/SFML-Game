@@ -4,6 +4,7 @@
 #include "Castillo.h"
 #include "Final.h"
 #include "Puntaje.h"
+#include "Honderos.h"
 
 SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 	
@@ -29,9 +30,7 @@ SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 		
 		break;
 	case 'D':
-		for(int i=2;i<3;i++) {  
-			Malosmalosos.push_back(new Enemigos(1,50,0,Vector2f(5,5),Vector2f(500*i,200)));
-		}
+		Malosmalosos.push_back(new Honderos(Vector2f(500*2,200)));
 		break;
 	}
 	
@@ -39,6 +38,11 @@ SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 	m_camara1 = new View;
 	m_camara1->setSize(800.f,600.f);
 	m_camara1->setCenter(0,300);
+	
+	MusicaPrincipal.openFromFile("Recursos/MSegundoNivel.ogg");
+	MusicaPrincipal.setLoop(true);
+	MusicaPrincipal.setVolume(50);
+	MusicaPrincipal.play();
 }
 
 

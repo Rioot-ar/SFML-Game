@@ -2,6 +2,7 @@
 #include "Plataforma.h"
 #include "Personaje.h"
 #include "Puntaje.h"
+#include "Honderos.h"
 
 Final::Final(char SDificultad, Personaje* J) {
 	
@@ -29,9 +30,7 @@ Final::Final(char SDificultad, Personaje* J) {
 		
 		break;
 	case 'D':
-		for(int i=2;i<3;i++) {  
-			Malosmalosos.push_back(new Enemigos(1,50,100,Vector2f(5,0),Vector2f(500,200)));
-		}
+		Malosmalosos.push_back(new Honderos(Vector2f(500*2,200)));
 		break;
 	}
 	
@@ -41,11 +40,21 @@ Final::Final(char SDificultad, Personaje* J) {
 	m_camara1 = new View;
 	m_camara1->setSize(800.f,600.f);
 	m_camara1->setCenter(0,300);
+	
+	MusicaPrincipal.openFromFile("Recursos/MFinal.ogg");
+	MusicaPrincipal.setLoop(true);
+	MusicaPrincipal.setVolume(50);
+	MusicaPrincipal.play();
 }
 
 void Final::TerminarPartida (Juego & game) {
-	Jugador->consultarPuntos()+=400;
-	game.SetEscena(new Puntaje(Jugador->consultarPuntos()));
+	if(Jugador->ObtenerSalud()>0){
+		game.SetEscena(new Puntaje(Jugador->consultarPuntos()+=400));
+	}else{
+		game.SetEscena(new Puntaje(Jugador->consultarPuntos()));
+	}
+	
+	
 	
 }
 

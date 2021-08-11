@@ -118,7 +118,7 @@ bool Caballero::Atacar ( ) {
 	}
 	if(Keyboard::isKeyPressed(Keyboard::Key::Space)){
 		if(this->PuedeAtacar()){
-			m_proyectil = Proyectil(0.f,m_ataque,Vector2f(DirecionX,m_sprite.getGlobalBounds().height),Vector2f(m_sprite.getPosition().x,m_sprite.getPosition().y),Danio);
+			m_proyectil = Proyectil(0.f,m_ataque,Vector2f(DirecionX,0),Vector2f(m_sprite.getPosition().x,m_sprite.getPosition().y),Danio);
 			return true;
 		}
 	}else{return false;}

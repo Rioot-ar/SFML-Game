@@ -1,9 +1,7 @@
 #include "Juego.h"
 #include <SFML/Graphics.hpp>
 #include "Menu.h"
-#include <iostream>
 #include "Escena.h"
-#include "Puntaje.h"
 using namespace std;
 using namespace sf;
 Juego::Juego() : Ventana(VideoMode(800,600),"Desterraria"){
@@ -23,6 +21,7 @@ void Juego::Run(){
 		Actual->Dibujar(Ventana);
 		
 		if(m_siguiente_escena){
+			Actual->EntreEscena(Ventana);			
 			delete Actual;
 			Actual=m_siguiente_escena;
 			m_siguiente_escena= nullptr;

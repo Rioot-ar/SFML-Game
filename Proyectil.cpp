@@ -1,6 +1,7 @@
 #include "Proyectil.h"
 #include <cmath>
 #include "Personaje.h"
+#include <iostream>
 using namespace std;
 
 Proyectil::Proyectil(float R, Texture* T,Vector2f V,Vector2f Pi,float D){

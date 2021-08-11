@@ -1,10 +1,8 @@
 #include "Niveles.h"
 #include <SFML/Graphics.hpp>
 #include "Menu.h"
-#include "Mago.h"
 #include "Plataforma.h"
 #include <list>
-#include "Castillo.h"
 #include "Puntaje.h"
 using namespace std;
 
@@ -27,17 +25,18 @@ void Niveles::Actualizar (Juego & game) {
 	///Visual
 	Jugador->Colision(Objetos);
 	Jugador->Movimiento();
+	
 	///Mouse Respecto al personaje
 	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
-	MousePoss.x=(MousePoss.x-TamanioVentana.x/2);
-	MousePoss.y=Jugador->ObtenerSprite().getPosition().y-600*MousePoss.y/TamanioVentana.y;
-	//cout<<"( "<<MousePoss.x<<" , "<<MousePoss.y<<" )"<<endl;
+	MousePoss.x=(MousePoss.x-TamanioVentana.x/2.f)*m_camara1->getSize().x/TamanioVentana.x;
+	MousePoss.y=Jugador->ObtenerSprite().getPosition().y-m_camara1->getSize().y*MousePoss.y/TamanioVentana.y;
+
 	///Ataque
 	Jugador->VerificarDist(Vector2f(MousePoss));
 	Jugador->Atacar();
 	Jugador->habilidadEspecial();
 	///Daño 
-	
+	//cout<<"( "<<Jugador->ObtenerSprite().getPosition().x<<" , "<<Jugador->ObtenerSprite().getPosition().y<<" )"<<endl;
 //	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) { 
 //		if((*it)->RecibirDanio(Jugador->ObtenerProyectil())){
 //			Jugador->consultarPuntos()+=Jugador->consultarPuntos()+(*it)->consultarPuntos();
@@ -76,8 +75,10 @@ void Niveles::Actualizar (Juego & game) {
 	
 	///Otro final posible es que el jugador haya limpiado el nivel
 	if(Malosmalosos.empty()){Termino=true;}
+	
+	
 	///Se cae del mapa
-	if(Jugador->ObtenerSprite().getPosition().y>600){Jugador->Matar();Termino=true;}
+	if(Jugador->ObtenerSprite().getPosition().y>m_camara1->getSize().y){Jugador->Matar();Termino=true;}
 	
 	if(Termino){
 		this->TerminarPartida(game);

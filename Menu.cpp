@@ -4,7 +4,6 @@
 #include "Juego.h"
 #include "SeleccionDePersonaje.h"
 #include "Ayuda.h"
-#include <iostream>
 #include "Puntaje.h"
 using namespace std;
 using namespace sf;
@@ -28,7 +27,6 @@ Menu::Menu(){
 	FondoE->setTexture(*FondoEscena);
 	FondoE->setPosition(0,0);
 	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
-	
 	FlechaM= new Sprite;
 	CargarTexto(Titulo, 70, "Desterraria",Vector2f( TamanioVentana.x/2.f,0),*fuente,1 );
 	CargarTexto(MenuInicio, 30, "Iniciar Partida",Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0.25),*fuente );
@@ -89,6 +87,7 @@ void Menu::Actualizar(Juego &game){
 		FlechaM->setPosition(MenuPuntajes.getPosition().x,MenuPuntajes.getPosition().y+MenuPuntajes.getGlobalBounds().height/2.f);
 		if(Keyboard::isKeyPressed(Keyboard::Key::Return) or Mouse::isButtonPressed(Mouse::Left)){
 			game.SetEscena(new Puntaje(0));
+			
 		}
 	}
 	

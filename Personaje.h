@@ -5,8 +5,10 @@
 #include "Objeto.h"
 #include "Proyectil.h"
 #include <list>
+#include <cmath>
 using namespace std;
 using namespace sf;
+
 class Personaje {
 public:
 	Personaje();
@@ -24,6 +26,7 @@ public:
 	virtual void VerificarDist(Vector2f Per);
 	void VolverInicio(){m_sprite.setPosition(70,200);Posicion=m_sprite.getPosition();}
 	int &consultarPuntos(){return puntos;}
+	Vector2f CalcularVelocidad(float Pend, float VELP,int DIR);
 protected:
 	Texture* Apariencia, *m_ataque;
 	Sprite m_sprite;
