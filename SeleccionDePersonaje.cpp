@@ -10,6 +10,14 @@ using namespace std;
 using namespace sf;
 SeleccionDePersonaje::SeleccionDePersonaje() {
 	TamanioVentana = {800,600};
+
+	FondoEscena= new Texture;
+	FondoE= new Sprite;
+	FondoEscena->loadFromFile("Recursos/FondoSe.jpg");
+	
+	FondoE->setTexture(*FondoEscena);
+	FondoE->setPosition(0,0);
+	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
 	
 	//Titulo 1----------------------------------------------
 	Seleccion.setFont(*fuente);
@@ -19,8 +27,9 @@ SeleccionDePersonaje::SeleccionDePersonaje() {
 
 	
 	//Mago-------------------------------------------------
-	t_Mago.loadFromFile("Recursos/Mago.png");
+	t_Mago.loadFromFile("Recursos/Personajes/Mago.png");
 	m_Mago.setTexture(t_Mago);
+	m_Mago.setTextureRect(IntRect(0,0,86,109));
 	m_Mago.setScale(0.5,0.5);
 	
 	TMago.setFont(*fuente);
@@ -29,8 +38,9 @@ SeleccionDePersonaje::SeleccionDePersonaje() {
 
 	
 	//Caballero-------------------------------------------
-	t_Caballero.loadFromFile("Recursos/Caballero.png");
+	t_Caballero.loadFromFile("Recursos/Personajes/Caballero.png");
 	m_Caballero.setTexture(t_Caballero);
+	m_Caballero.setTextureRect(IntRect(0,0,86,109));
 	m_Caballero.setScale(0.5,0.5);
 
 	
@@ -79,10 +89,16 @@ SeleccionDePersonaje::SeleccionDePersonaje() {
 	FlechaD.setPosition(Normal.getPosition().x,Normal.getPosition().y);
 	
 	
+	MusicaPrincipal.openFromFile("Recursos/MSeleccionDePersonaje.ogg");
+	MusicaPrincipal.setLoop(true);
+	MusicaPrincipal.setVolume(50);
+	MusicaPrincipal.play();
+	
 }
 void SeleccionDePersonaje::Actualizar(Juego &game){
 	TamanioVentana = Vector2f(game.Ventana.getSize());
 	game.Ventana.setView(View(Vector2f(TamanioVentana.x/2,TamanioVentana.y/2),TamanioVentana));
+	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
 	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
 	Rect<float> mouse(MousePoss.x,MousePoss.y,1,1);
 	bool Cambiarescena=false;
@@ -99,17 +115,17 @@ void SeleccionDePersonaje::Actualizar(Juego &game){
 	Seleccion.setOrigin(Dificultad.getGlobalBounds().width/2,0);
 	
 	
-	m_Mago.setPosition(TamanioVentana.x*0.09,TamanioVentana.y*0.25);
+	m_Mago.setPosition(TamanioVentana.x*0.09,TamanioVentana.y*0.30);
 	m_Mago.setScale(TamanioVentana.x*0.0006,TamanioVentana.x*0.0006);
 	TMago.setCharacterSize(TamanioVentana.x*0.0375);
 	TMago.setPosition(m_Mago.getPosition().x+m_Mago.getGlobalBounds().width,m_Mago.getPosition().y);
 	
-	m_Caballero.setPosition(TamanioVentana.x*0.4,TamanioVentana.y*0.25);
+	m_Caballero.setPosition(TamanioVentana.x*0.4,TamanioVentana.y*0.30);
 	m_Caballero.setScale(TamanioVentana.x*0.0006,TamanioVentana.x*0.0006);
 	TCaballero.setCharacterSize(TamanioVentana.x*0.0375);
 	TCaballero.setPosition(m_Caballero.getPosition().x+m_Caballero.getGlobalBounds().width,m_Caballero.getPosition().y);
 	
-	m_Cazador.setPosition(TamanioVentana.x*0.75,TamanioVentana.y*0.25);
+	m_Cazador.setPosition(TamanioVentana.x*0.75,TamanioVentana.y*0.30);
 	m_Cazador.setScale(TamanioVentana.x*0.0006,TamanioVentana.x*0.0006);
 	TCazador.setCharacterSize(TamanioVentana.x*0.0375);
 	TCazador.setPosition(m_Cazador.getPosition().x+m_Cazador.getGlobalBounds().width,m_Cazador.getPosition().y);
@@ -144,7 +160,7 @@ void SeleccionDePersonaje::Actualizar(Juego &game){
 		if(TCazador.getGlobalBounds().intersects(mouse)){
 			FlechaM.setPosition(m_Cazador.getPosition().x,m_Cazador.getPosition().y+m_Cazador.getGlobalBounds().height/2);
 			if(Mouse::isButtonPressed(Mouse::Left)){
-				/*SeleccionandoDificultad = true;*/
+				SeleccionandoDificultad = true;
 				EleccionPersonaje = 'H';
 			}	
 		}
@@ -193,7 +209,9 @@ void SeleccionDePersonaje::Actualizar(Juego &game){
 }
 	}
 void SeleccionDePersonaje::Dibujar(RenderWindow &Vent){
+	
 	Vent.clear(Color(0,0,0,255));
+	Vent.draw(*FondoE);
 	Vent.draw(Seleccion);
 	Vent.draw(TMago);
 	Vent.draw(m_Mago);

@@ -52,7 +52,7 @@ class InputBox:public sf::Text {
 public:
 	InputBox(const sf::Font &font, int size=30, sf::Color color=sf::Color::Black) {
 		for(int i=0;i<sf::Keyboard::KeyCount;i++) is_down[i]=true;
-		max_chars=0;
+		max_chars=20;
 		single_word=false;
 		editable=true;
 		setFont(font);

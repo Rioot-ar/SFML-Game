@@ -14,7 +14,7 @@ private:
 	int QueMostrar=0;
 	Text ControlesTitulo, DificultadTitulo, PersonajesTitulo;
 	Text ControlesContenido, DificultadContenido, PersonajesContenido;
-	Texture Fondo;
+	
 };
 
 #endif

@@ -1,28 +1,27 @@
 #include "Juego.h"
 #include <SFML/Graphics.hpp>
 #include "Menu.h"
-#include <iostream>
 #include "Escena.h"
-#include "Puntaje.h"
 using namespace std;
 using namespace sf;
 Juego::Juego() : Ventana(VideoMode(800,600),"Desterraria"){
-	Ventana.setFramerateLimit(80);
+	Ventana.setFramerateLimit(60);
 	Actual = new Menu;
 	m_siguiente_escena = nullptr;
 }
 void Juego::Run(){
 	while(Ventana.isOpen()) {
-
+		
+		Actual->Actualizar(*this);
 		while(Ventana.pollEvent(e)) {
 			if(e.type == Event::Closed){
 				Ventana.close();	
 			}
 		}		
-		Actual->Actualizar(*this);
 		Actual->Dibujar(Ventana);
 		
 		if(m_siguiente_escena){
+			Actual->EntreEscena(Ventana);			
 			delete Actual;
 			Actual=m_siguiente_escena;
 			m_siguiente_escena= nullptr;

@@ -1,10 +1,8 @@
 #include "Niveles.h"
 #include <SFML/Graphics.hpp>
 #include "Menu.h"
-#include "Mago.h"
 #include "Plataforma.h"
 #include <list>
-#include "Castillo.h"
 #include "Puntaje.h"
 using namespace std;
 
@@ -14,41 +12,48 @@ Niveles::Niveles (char Dificultad, char SPersonaje) {
 }
 
 void Niveles::Actualizar (Juego & game) {
-
 	//salir al menu
 	TamanioVentana = Vector2f(game.Ventana.getSize());
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)){
 		game.SetEscena(new Menu);
 	}
+	m_camara1->setCenter(Jugador->ObtenerSprite().getPosition().x,m_camara1->getCenter().y);
 	
 	
-	
+	FondoE->setScale(1,TamanioVentana.y/FondoEscena->getSize().y);
 	//Jugador 
 	///Visual
 	Jugador->Colision(Objetos);
 	Jugador->Movimiento();
-	m_camara1->setCenter(Jugador->ObtenerSprite().getPosition().x,TamanioVentana.y/2);
+	
 	///Mouse Respecto al personaje
 	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
-	MousePoss.x=Jugador->ObtenerSprite().getPosition().x+MousePoss.x-TamanioVentana.x/2;
-
+	MousePoss.x=(MousePoss.x-TamanioVentana.x/2.f)*m_camara1->getSize().x/TamanioVentana.x;
+	MousePoss.y=Jugador->ObtenerSprite().getPosition().y-m_camara1->getSize().y*MousePoss.y/TamanioVentana.y;
 
 	///Ataque
 	Jugador->VerificarDist(Vector2f(MousePoss));
 	Jugador->Atacar();
 	Jugador->habilidadEspecial();
 	///Daño 
-	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) { 
+	//cout<<"( "<<Jugador->ObtenerSprite().getPosition().x<<" , "<<Jugador->ObtenerSprite().getPosition().y<<" )"<<endl;
+//	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) { 
+//		if((*it)->RecibirDanio(Jugador->ObtenerProyectil())){
+//			Jugador->consultarPuntos()+=Jugador->consultarPuntos()+(*it)->consultarPuntos();
+//			delete *it;
+//			it=Malosmalosos.erase(it);
+//		}
+//	}	
+//	Jugador->ObtenerProyectil()->Movimiento();
+
+	///Enemigos
+	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) {
 		if((*it)->RecibirDanio(Jugador->ObtenerProyectil())){
 			Jugador->consultarPuntos()+=Jugador->consultarPuntos()+(*it)->consultarPuntos();
 			delete *it;
 			it=Malosmalosos.erase(it);
+			continue;
 		}
-	}	
-	Jugador->ObtenerProyectil()->Movimiento();
-
-	///Enemigos
-	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) {
 		(*it)->Colision(Objetos);
 		(*it)->VerificarDist(Jugador->ObtenerSprite().getPosition());
 		(*it)->Movimiento();
@@ -60,7 +65,7 @@ void Niveles::Actualizar (Juego & game) {
 			break;
 		}
 	}
-
+	Jugador->ObtenerProyectil()->Movimiento();
 
 	///Objetos.size()-1 el ultimo objeto insertado es el destino del jugador
 	///CORREGIR, EN EL FINAL SE TERMINA EN LA PLATAFORMA
@@ -71,15 +76,21 @@ void Niveles::Actualizar (Juego & game) {
 	///Otro final posible es que el jugador haya limpiado el nivel
 	if(Malosmalosos.empty()){Termino=true;}
 	
+	
+	///Se cae del mapa
+	if(Jugador->ObtenerSprite().getPosition().y>m_camara1->getSize().y){Jugador->Matar();Termino=true;}
+	
 	if(Termino){
 		this->TerminarPartida(game);
 		Jugador=nullptr;
 	}
+
 }
 
 void Niveles::Dibujar (RenderWindow & Vent) {
 	Vent.clear(Color(200,150,255,255));
 	//Fondo
+	Vent.draw(*FondoE);
 	//Dibujo objetos
 	for(size_t i=0;i<Objetos.size();i++) { 
 		Vent.draw(Objetos[i]->ObtenerForma());

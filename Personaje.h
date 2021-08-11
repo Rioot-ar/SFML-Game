@@ -5,8 +5,10 @@
 #include "Objeto.h"
 #include "Proyectil.h"
 #include <list>
+#include <cmath>
 using namespace std;
 using namespace sf;
+
 class Personaje {
 public:
 	Personaje();
@@ -18,17 +20,20 @@ public:
 	virtual bool PuedeAtacar();
 	Proyectil* ObtenerProyectil(){return &m_proyectil;}
 	bool RecibirDanio(Proyectil *D);
+	void Matar(){Salud=0;}
+	float ObtenerSalud(){return Salud;}
 	virtual ~Personaje();
 	virtual void VerificarDist(Vector2f Per);
 	void VolverInicio(){m_sprite.setPosition(70,200);Posicion=m_sprite.getPosition();}
 	int &consultarPuntos(){return puntos;}
+	Vector2f CalcularVelocidad(float Pend, float VELP,int DIR);
 protected:
 	Texture* Apariencia, *m_ataque;
 	Sprite m_sprite;
-	float Salud, Defensa, Danio, Salto, Pendiente, DistAPers,DirecionX;
+	float Salud, Defensa, Danio, Salto, Pendiente, DistAPers,DirecionX,velEst,VelocidadAtaque;
 	Vector2f Posicion,Velocidad;
-	bool Parado, Obstaculo;
-	Clock m_puedeatk;
+	bool Parado, ObstaculoDe,ObstaculoIz;
+	Clock m_puedeatk,timer;
 	Proyectil m_proyectil;
 	int puntos, PuntosdHabilidad;
 	
