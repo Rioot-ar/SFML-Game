@@ -9,8 +9,10 @@ Caballero::Caballero() {
 	m_sprite.setOrigin(m_sprite.getGlobalBounds().width/2.f,m_sprite.getGlobalBounds().height/2.f);
 	m_sprite.setPosition(0,200);
 	m_sprite.setScale(0.3,0.3);
-	m_ataque->loadFromFile("Recursos/AtaqueCaba.png");
-
+	m_ataque->loadFromFile("Recursos/Utiles/AtaqueCaba.png");
+	
+	SonidoAtaque.openFromFile("Recursos/Utiles/AtaqueEspada.ogg");
+	SonidoAtaque.setVolume(40);
 	
 	//Normas
 	velEst=1.5;
@@ -25,6 +27,10 @@ Caballero::Caballero() {
 	PuntosdHabilidad = 1;
 	VelocidadAtaque=1;
 	habilidadActivada=false;
+	
+	Font* fuente=new Font;fuente->loadFromFile("Recursos/Utiles/Informacion.ttf");
+	TInformacion= new Text;
+	TInformacion->setFont(*fuente);	
 }
 
 void Caballero::habilidadEspecial ( ) {
@@ -118,10 +124,23 @@ bool Caballero::Atacar ( ) {
 	}
 	if(Keyboard::isKeyPressed(Keyboard::Key::Space)){
 		if(this->PuedeAtacar()){
+			SonidoAtaque.play();
 			m_proyectil = Proyectil(0.f,m_ataque,Vector2f(DirecionX,0),Vector2f(m_sprite.getPosition().x,m_sprite.getPosition().y),Danio);
 			return true;
 		}
 	}else{return false;}
 	
 }
-
+Text Caballero::Informacion (unsigned TV ) {
+	
+	string aux;
+	aux="Vida: "+to_string((int)Salud)+"\nPuntos de habilidad: "+to_string(PuntosdHabilidad);
+	if(habilidadActivada){
+		aux+="\nTiempo de habilidad restante: "+to_string(5-(int)HAbInven.getElapsedTime().asSeconds());
+	}
+	TInformacion->setCharacterSize(TV*0.02);
+	TInformacion->setString(aux);
+	TInformacion->setPosition(m_sprite.getPosition().x-TV/2.f,0.f);
+	
+	return *TInformacion;
+}

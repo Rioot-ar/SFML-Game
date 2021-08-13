@@ -3,7 +3,6 @@
 #include "Mago.h"
 #include "Plataforma.h"
 #include <list>
-#include "Castillo.h"
 #include "PrimerNivel.h"
 #include "Puntaje.h"
 #include "SegundoNivel.h"
@@ -13,12 +12,18 @@
 #include "Honderos.h"
 #include "Asesino.h"
 #include "Bandidos.h"
+#include "Objetivo.h"
 
 PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	
 	FondoEscena= new Texture;
 	FondoE= new Sprite;
-	FondoEscena->loadFromFile("Recursos/FondoNivel.png");
+	Piso= new Texture;
+	TObjetivo=new Texture;
+	
+	Piso->loadFromFile("Recursos/Estructuras/PisoPrimerNivel.png");
+	TObjetivo->loadFromFile("Recursos/Estructuras/Castillo.png");
+	FondoEscena->loadFromFile("Recursos/Estructuras/FondoNivel.png");
 	
 	FondoE->setTexture(*FondoEscena);
 	FondoE->setOrigin(0,FondoE->getGlobalBounds().height);
@@ -49,7 +54,7 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 				Malosmalosos.push_back(new Honderos(Vector2f(250*i,200)));
 				break;
 			case 1:
-				Malosmalosos.push_back(new Honderos(Vector2f(215*i,200)));
+				Malosmalosos.push_back(new Bandidos(Vector2f(215*i,200)));
 				break;
 			}
 		}
@@ -61,10 +66,10 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 				Malosmalosos.push_back(new Honderos(Vector2f(150*i,200)));
 				break;
 			case 1:
-				Malosmalosos.push_back(new Honderos(Vector2f(150*i,200)));
+				Malosmalosos.push_back(new Bandidos(Vector2f(150*i,200)));
 				break;
 			case 2:
-				Malosmalosos.push_back(new Honderos(Vector2f(150*i,200)));
+				Malosmalosos.push_back(new Asesino(Vector2f(150*i,200)));
 				break;
 			}
 			
@@ -73,30 +78,30 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	}
 	///Definir nivel
 	//Piso 
-	Objetos.push_back(new Plataforma(Vector2f(1140,50),Vector2f(-20,550)));
-	Objetos.push_back(new Plataforma(Vector2f(1140,50),Vector2f(1220,550)));
-	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2420,550)));
-	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2500,550)));
-	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2580,550)));
-	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2660,550)));
-	Objetos.push_back(new Plataforma(Vector2f(1140,50),Vector2f(2740,550)));
+	Objetos.push_back(new Plataforma(Vector2f(1140,50),Vector2f(-20,550),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(1140,50),Vector2f(1220,550),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2420,550),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2500,550),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2580,550),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2660,550),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(1140,50),Vector2f(2740,550),Piso));
 	
 	//Plataformas
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(150,475)));
-	Objetos.push_back(new Plataforma(Vector2f(300,25),Vector2f(250,400)));
-	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(650,400)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(925,330)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1170,360)));
-	Objetos.push_back(new Plataforma(Vector2f(250,25),Vector2f(1400,360)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1750,300)));
-	Objetos.push_back(new Plataforma(Vector2f(120,25),Vector2f(2050,300)));
-	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(2300,300)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(2800,475)));
-	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(3000,355)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(3050,475)));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(150,475),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(300,25),Vector2f(250,400),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(650,400),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(925,330),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1170,360),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(250,25),Vector2f(1400,360),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1750,300),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(120,25),Vector2f(2050,300),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(2300,300),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(2800,475),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(3000,355),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(3050,475),Piso));
 	
 	//Objetivo
-	Objetos.push_back(new Castillo(Vector2f(400,200),Vector2f(3500,552)));
+	Objetos.push_back(new Objetivo(Vector2f(400,200),Vector2f(3500,550),TObjetivo));
 	
 	FondoE->setPosition(-600,600);
 	
@@ -105,7 +110,7 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	m_camara1->setSize(800.f,600.f);
 	m_camara1->setCenter(0,300);
 	
-	MusicaPrincipal.openFromFile("Recursos/MPrimerNivel.ogg");
+	MusicaPrincipal.openFromFile("Recursos/Utiles/MPrimerNivel.ogg");
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
 	MusicaPrincipal.play();

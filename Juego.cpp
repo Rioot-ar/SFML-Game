@@ -4,7 +4,7 @@
 #include "Escena.h"
 using namespace std;
 using namespace sf;
-Juego::Juego() : Ventana(VideoMode(800,600),"Desterraria"){
+Juego::Juego() : Ventana(VideoMode(800,600),"Kingdom"){
 	Ventana.setFramerateLimit(60);
 	Actual = new Menu;
 	m_siguiente_escena = nullptr;

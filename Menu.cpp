@@ -22,18 +22,18 @@ void CargarTexto(Text &Tipo, int Tamano, String Texto, Vector2f Posicion, const 
 Menu::Menu(){
 	FondoEscena= new Texture;
 	FondoE= new Sprite;
-	FondoEscena->loadFromFile("Recursos/Fondo.PNG");
+	FondoEscena->loadFromFile("Recursos/Estructuras/Fondo.PNG");
 	
 	FondoE->setTexture(*FondoEscena);
 	FondoE->setPosition(0,0);
 	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
 	FlechaM= new Sprite;
-	CargarTexto(Titulo, 70, "Desterraria",Vector2f( TamanioVentana.x/2.f,0),*fuente,1 );
+	CargarTexto(Titulo, 70, "Kingdom",Vector2f( TamanioVentana.x/2.f,0),*fuente,1 );
 	CargarTexto(MenuInicio, 30, "Iniciar Partida",Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0.25),*fuente );
 	CargarTexto(MenuOpciones, 30, "Ayuda",Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0.5),*fuente );
 	CargarTexto(MenuPuntajes, 30, "Puntajes",Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0.75),*fuente );
 	
-	MusicaPrincipal.openFromFile("Recursos/MenuP.ogg");
+	MusicaPrincipal.openFromFile("Recursos/Utiles/MenuP.ogg");
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
 	MusicaPrincipal.play();

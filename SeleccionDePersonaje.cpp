@@ -13,7 +13,7 @@ SeleccionDePersonaje::SeleccionDePersonaje() {
 
 	FondoEscena= new Texture;
 	FondoE= new Sprite;
-	FondoEscena->loadFromFile("Recursos/FondoSe.jpg");
+	FondoEscena->loadFromFile("Recursos/Estructuras/FondoSe.jpg");
 	
 	FondoE->setTexture(*FondoEscena);
 	FondoE->setPosition(0,0);
@@ -55,8 +55,9 @@ SeleccionDePersonaje::SeleccionDePersonaje() {
 	TCazador.setString("Cazador");
 
 	
-	t_Cazador.loadFromFile("Recursos/Cazador.png");
+	t_Cazador.loadFromFile("Recursos/Personajes/Explorador.png");
 	m_Cazador.setTexture(t_Cazador);
+	m_Cazador.setTextureRect(IntRect(0,0,86,109));
 	m_Cazador.setScale(0.5,0.5);	
 
 	
@@ -89,7 +90,7 @@ SeleccionDePersonaje::SeleccionDePersonaje() {
 	FlechaD.setPosition(Normal.getPosition().x,Normal.getPosition().y);
 	
 	
-	MusicaPrincipal.openFromFile("Recursos/MSeleccionDePersonaje.ogg");
+	MusicaPrincipal.openFromFile("Recursos/Utiles/MSeleccionDePersonaje.ogg");
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
 	MusicaPrincipal.play();

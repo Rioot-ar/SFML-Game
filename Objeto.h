@@ -6,12 +6,12 @@ class Objeto {
 public:
 	Objeto();
 	FloatRect CuadObT,CuadObL,CuadObR,CuadObB;
-	RectangleShape ObtenerForma(){return Forma;}
+	RectangleShape* ObtenerForma(){return &Forma;}
+	virtual bool EsObjetivo(){return esobjetivo;}
 	virtual ~Objeto();
 protected:
+	bool esobjetivo;
 	RectangleShape Forma;
-
-	Texture* Apariencia;
 };
 
 #endif

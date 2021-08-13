@@ -3,6 +3,7 @@
 #include <SFML/System/Clock.hpp>
 #include <cmath>
 #include <iostream>
+#include <SFML/System/Vector2.hpp>
 using namespace std;
 using namespace sf;
 
@@ -30,7 +31,7 @@ void Personaje::Colision(vector<Objeto*> Ob){
 	ObstaculoIz=false;
 	
 	///Hitbox del jugador
-	FloatRect CuaJuR(m_sprite.getGlobalBounds().left+m_sprite.getGlobalBounds().width+1.0,m_sprite.getGlobalBounds().top,-5.0,m_sprite.getGlobalBounds().height);
+	FloatRect CuaJuR(m_sprite.getGlobalBounds().left+m_sprite.getGlobalBounds().width+1.0,m_sprite.getGlobalBounds().top,5.0,m_sprite.getGlobalBounds().height);
 	FloatRect CuaJuL(m_sprite.getGlobalBounds().left-1.0,m_sprite.getGlobalBounds().top,-5.0,m_sprite.getGlobalBounds().height);
 	FloatRect CuaJuT(m_sprite.getGlobalBounds().left,m_sprite.getGlobalBounds().top-1.0,m_sprite.getGlobalBounds().width,-5.f);
 		
@@ -77,7 +78,7 @@ void Personaje::Colision(vector<Objeto*> Ob){
 bool Personaje::RecibirDanio (Proyectil *D) {
 	
 	if(D->ObtenerForma().getGlobalBounds().intersects(m_sprite.getGlobalBounds())){
-		Salud=Salud-(D->ObDanio());
+		Salud-=(D->ObDanio())/Defensa;
 		D->Impacto();
 	}
 
@@ -97,6 +98,7 @@ bool Personaje::PuedeAtacar ( ) {
 Personaje::~Personaje ( ) {
 	delete Apariencia;
 	delete m_ataque;
+	SonidoAtaque.stop();
 }
 
 void Personaje::VerificarDist (Vector2f Per) {
@@ -106,8 +108,12 @@ void Personaje::VerificarDist (Vector2f Per) {
 
 Vector2f Personaje::CalcularVelocidad (float Pend, float VELP, int DIR) {
 	Vector2f Vec;
-	Vec.x=cos(atan(Pend))*VELP*DIR;
 	Vec.y=sin(atan(Pend))*VELP;
+	Vec.x=cos(atan(Pend))*VELP*DIR;
 	return Vec;
+}
+
+Text Personaje::Informacion (unsigned TV) {
+	
 }
 

@@ -14,7 +14,7 @@ using namespace sf;
 Puntaje::Puntaje(int PP): m_entrada(*fuente)  {
 	FondoEscena= new Texture;
 	FondoE= new Sprite;
-	FondoEscena->loadFromFile("Recursos/FondoFinal.jpg");
+	FondoEscena->loadFromFile("Recursos/Estructuras/FondoFinal.jpg");
 	
 	FondoE->setTexture(*FondoEscena);
 	FondoE->setPosition(0,0);
@@ -47,7 +47,7 @@ Puntaje::Puntaje(int PP): m_entrada(*fuente)  {
 	MostrarPuntuaciones.setOrigin(MostrarNPuntuaciones.getGlobalBounds().width,0);
 	
 	///Cargo los puntos en un vector.
-	Ar.open("Recursos/Puntuaciones.dat",ios::binary|ios::ate|ios::in|ios::out);
+	Ar.open("Recursos/Utiles/Puntuaciones.dat",ios::binary|ios::ate|ios::in|ios::out);
 	int bytes = Ar.tellg();
 	int cantPuntajes = bytes/sizeof(Puntos);
 	Ar.seekg(0);
@@ -68,7 +68,7 @@ Puntaje::Puntaje(int PP): m_entrada(*fuente)  {
 	MostrarPuntuaciones.setString(Pun);
 	MostrarNPuntuaciones.setString(Nom);
 	
-	MusicaPrincipal.openFromFile("Recursos/Puntajes.ogg");
+	MusicaPrincipal.openFromFile("Recursos/Utiles/Puntajes.ogg");
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
 	MusicaPrincipal.play();

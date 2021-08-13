@@ -9,10 +9,11 @@ public:
 	Caballero();
 	void habilidadEspecial ( );
 	void Movimiento ( );
+	Text Informacion(unsigned TV)override;
 	void VerificarDist (Vector2f Per);
 	bool Atacar ( );
 private:
-	Clock HAbInven, AnimAtaque;;
+	Clock HAbInven;
 	bool habilidadActivada;
 };
 

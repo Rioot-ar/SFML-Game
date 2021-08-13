@@ -10,6 +10,7 @@ public:
 	void habilidadEspecial ( );
 	void Movimiento ( );
 	void VerificarDist (Vector2f Per);
+	Text Informacion(unsigned TV)override;
 	bool Atacar ( );
 private:
 	Clock HAbInven;

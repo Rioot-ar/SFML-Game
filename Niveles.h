@@ -25,6 +25,8 @@ protected:
 	list<Personaje*> Malosmalosos;
 	vector<Objeto*> Objetos;
 	char Dificultad;
+	Texture* Piso;
+	Texture* TObjetivo;
 	Clock TiempoTranscurrido;
 };
 

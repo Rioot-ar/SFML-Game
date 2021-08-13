@@ -5,8 +5,8 @@ Escena::Escena() {
 	fuente = new Font;
 	FlechaMenu = new Texture;
 	e=new Event;
-	fuente->loadFromFile("Recursos/Pix.ttf");
-	FlechaMenu->loadFromFile("Recursos/Flecha.PNG");
+	fuente->loadFromFile("Recursos/Utiles/Pix.ttf");
+	FlechaMenu->loadFromFile("Recursos/Utiles/Flecha.PNG");
 	TamanioVentana={800,600};
 }
 
@@ -17,7 +17,7 @@ Escena::~Escena ( ) {
 
 void Escena::EntreEscena (RenderWindow & Ventana) {
 	Texture prueba;
-	prueba.loadFromFile("Recursos/EntreEscena.png");
+	prueba.loadFromFile("Recursos/Utiles/EntreEscena.png");
 	Sprite prue;
 	prue.setTexture(prueba);
 	prue.setScale((float)Ventana.getSize().x/(float)prueba.getSize().x,(float)Ventana.getSize().y/(float)prueba.getSize().y);

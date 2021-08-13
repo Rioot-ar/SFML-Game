@@ -3,12 +3,19 @@
 #include "Personaje.h"
 #include "Puntaje.h"
 #include "Honderos.h"
+#include "JefeFinal.h"
 
 Final::Final(char SDificultad, Personaje* J) {
 	
 	FondoEscena= new Texture;
 	FondoE= new Sprite;
-	FondoEscena->loadFromFile("Recursos/FondoNivel.png");
+	FondoEscena->loadFromFile("Recursos/Estructuras/FondoFinal.png");
+	
+	Piso= new Texture;
+	Piso->loadFromFile("Recursos/Estructuras/PisoSegundoNivel.png");
+	
+//	TObjetivo=new Texture;
+//	TObjetivo->loadFromFile("")
 	
 	FondoE->setTexture(*FondoEscena);
 	FondoE->setOrigin(0,FondoE->getGlobalBounds().height);
@@ -17,22 +24,20 @@ Final::Final(char SDificultad, Personaje* J) {
 	J->VolverInicio();
 	Jugador= J;
 	Dificultad=SDificultad;
-	//Objetos
-	Objetos.push_back(new Plataforma(Vector2f(10000,50),Vector2f(20,550)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(400,500)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(600,500)));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1200,500)));
+	//Piso
+	Objetos.push_back(new Plataforma(Vector2f(1500,50),Vector2f(20,550),Piso));
+
+	
+
+	//Plataformas
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(400,475),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(600,475),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1000,475),Piso));
 
 	
 	//Jefe
-	switch(Dificultad){
-	case 'N':
-		
-		break;
-	case 'D':
-		Malosmalosos.push_back(new Honderos(Vector2f(500*2,200)));
-		break;
-	}
+	Malosmalosos.push_back(new JefeFinal(Vector2f(800,200),Dificultad));
+
 	
 
 	
@@ -41,7 +46,7 @@ Final::Final(char SDificultad, Personaje* J) {
 	m_camara1->setSize(800.f,600.f);
 	m_camara1->setCenter(0,300);
 	
-	MusicaPrincipal.openFromFile("Recursos/MFinal.ogg");
+	MusicaPrincipal.openFromFile("Recursos/Utiles/MFinal.ogg");
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
 	MusicaPrincipal.play();

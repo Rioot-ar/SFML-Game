@@ -2,20 +2,20 @@
 
 Honderos::Honderos(Vector2f pos) {
 	velEst=1;
-	Salud=1;
-	Defensa=50;
-	Danio=0;
+	Salud=25;
+	Defensa=1;
+	Danio=7;
 	Velocidad=Vector2f(1,5);
 	Posicion=pos;
 	VelProyectil=4;
 	PersonajeVisto=false;
-	puntos = 10;
+	puntos = 7;
 	VelocidadAtaque=3;
 	RangoVision=200.f;
 	RangoAtaque=150.f;
 	
-	m_ataque->loadFromFile("Recursos/ataque.png");
-	Apariencia->loadFromFile("Recursos/Personajes/Enemigo2.png");
+	m_ataque->loadFromFile("Recursos/Utiles/AtaqueFuego.png");
+	Apariencia->loadFromFile("Recursos/Personajes/MagoEn.png");
 	m_sprite.setTexture(*Apariencia);
 	m_sprite.setTextureRect(IntRect(0,0,86,109));
 	m_sprite.setOrigin(m_sprite.getGlobalBounds().width,m_sprite.getGlobalBounds().height/2);

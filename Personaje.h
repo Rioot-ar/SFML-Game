@@ -6,6 +6,7 @@
 #include "Proyectil.h"
 #include <list>
 #include <cmath>
+#include <SFML/Audio.hpp>
 using namespace std;
 using namespace sf;
 
@@ -27,6 +28,8 @@ public:
 	void VolverInicio(){m_sprite.setPosition(70,200);Posicion=m_sprite.getPosition();}
 	int &consultarPuntos(){return puntos;}
 	Vector2f CalcularVelocidad(float Pend, float VELP,int DIR);
+	virtual Text Informacion(unsigned TV);
+	
 protected:
 	Texture* Apariencia, *m_ataque;
 	Sprite m_sprite;
@@ -35,6 +38,8 @@ protected:
 	bool Parado, ObstaculoDe,ObstaculoIz;
 	Clock m_puedeatk,timer;
 	Proyectil m_proyectil;
+	Text* TInformacion;
+	Music SonidoAtaque;
 	int puntos, PuntosdHabilidad;
 	
 };
