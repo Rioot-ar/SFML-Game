@@ -14,6 +14,8 @@ Proyectil::Proyectil(float R, Texture* T,Vector2f V,Vector2f Pi,float D){
 	m_sprite.setTexture(*T);
 	m_sprite.setOrigin(m_sprite.getGlobalBounds().width/2,m_sprite.getGlobalBounds().height/2);
 	m_sprite.setPosition(Pi);
+	m_sprite.rotate(atan(m_velocidad.y/m_velocidad.x)*180/3.14);
+
 	if(m_rango==0){
 		m_sprite.setOrigin(m_sprite.getGlobalBounds().width/2,m_sprite.getGlobalBounds().height);
 		DistRecorrida=0;

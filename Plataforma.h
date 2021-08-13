@@ -4,7 +4,7 @@
 using namespace sf;
 class Plataforma : public Objeto {
 public:
-	Plataforma(Vector2f Tamanio, Vector2f Posicion);
+	Plataforma(Vector2f Tamanio, Vector2f Posicion, Texture* Nivel);
 
 	~Plataforma();
 private:

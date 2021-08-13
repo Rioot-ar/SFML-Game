@@ -20,7 +20,6 @@ void Niveles::Actualizar (Juego & game) {
 	m_camara1->setCenter(Jugador->ObtenerSprite().getPosition().x,m_camara1->getCenter().y);
 	
 	
-	FondoE->setScale(1,TamanioVentana.y/FondoEscena->getSize().y);
 	//Jugador 
 	///Visual
 	Jugador->Colision(Objetos);
@@ -35,21 +34,11 @@ void Niveles::Actualizar (Juego & game) {
 	Jugador->VerificarDist(Vector2f(MousePoss));
 	Jugador->Atacar();
 	Jugador->habilidadEspecial();
-	///Daño 
-	//cout<<"( "<<Jugador->ObtenerSprite().getPosition().x<<" , "<<Jugador->ObtenerSprite().getPosition().y<<" )"<<endl;
-//	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) { 
-//		if((*it)->RecibirDanio(Jugador->ObtenerProyectil())){
-//			Jugador->consultarPuntos()+=Jugador->consultarPuntos()+(*it)->consultarPuntos();
-//			delete *it;
-//			it=Malosmalosos.erase(it);
-//		}
-//	}	
-//	Jugador->ObtenerProyectil()->Movimiento();
 
 	///Enemigos
 	for(list<Personaje*>::iterator it=Malosmalosos.begin(); it!=Malosmalosos.end(); ++it ) {
 		if((*it)->RecibirDanio(Jugador->ObtenerProyectil())){
-			Jugador->consultarPuntos()+=Jugador->consultarPuntos()+(*it)->consultarPuntos();
+			Jugador->consultarPuntos()+=(*it)->consultarPuntos();
 			delete *it;
 			it=Malosmalosos.erase(it);
 			continue;
@@ -57,6 +46,7 @@ void Niveles::Actualizar (Juego & game) {
 		(*it)->Colision(Objetos);
 		(*it)->VerificarDist(Jugador->ObtenerSprite().getPosition());
 		(*it)->Movimiento();
+		(*it)->habilidadEspecial();
 		(*it)->Atacar();
 		(*it)->ObtenerProyectil()->Movimiento();
 		///Si el Jugador Llega a 0 de Vida Terminar Partida
@@ -68,8 +58,7 @@ void Niveles::Actualizar (Juego & game) {
 	Jugador->ObtenerProyectil()->Movimiento();
 
 	///Objetos.size()-1 el ultimo objeto insertado es el destino del jugador
-	///CORREGIR, EN EL FINAL SE TERMINA EN LA PLATAFORMA
-	if(Jugador->ObtenerSprite().getGlobalBounds().intersects(Objetos[Objetos.size()-1]->ObtenerForma().getGlobalBounds())){
+	if(Jugador->ObtenerSprite().getGlobalBounds().intersects(Objetos[Objetos.size()-1]->ObtenerForma()->getGlobalBounds()) && Objetos[Objetos.size()-1]->EsObjetivo()){
 		Termino=true;
 	}
 	
@@ -93,11 +82,12 @@ void Niveles::Dibujar (RenderWindow & Vent) {
 	Vent.draw(*FondoE);
 	//Dibujo objetos
 	for(size_t i=0;i<Objetos.size();i++) { 
-		Vent.draw(Objetos[i]->ObtenerForma());
+		Vent.draw(*Objetos[i]->ObtenerForma());
 	}
 	//Jugador
 	if(Jugador){
 		Vent.setView(*m_camara1);
+		Vent.draw(Jugador->Informacion(m_camara1->getSize().x));
 		Vent.draw(Jugador->ObtenerProyectil()->ObtenerForma());
 		Vent.draw(Jugador->ObtenerSprite());
 	}

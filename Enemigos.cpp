@@ -30,7 +30,7 @@ void Enemigos::VerificarDist (Vector2f Per) {
 
 bool Enemigos::Atacar ( ) {
 	if(RangoAtaque>=DistAPers){
-		if(this->PuedeAtacar()){
+		if(this->PuedeAtacar() && !m_proyectil.Existe()){
 			Vector2f MovProyectil=CalcularVelocidad(Pendiente,VelProyectil,DirecionX);
 			m_proyectil=Proyectil(RangoAtaque,m_ataque,Vector2f(MovProyectil),Vector2f(m_sprite.getPosition().x+2,m_sprite.getPosition().y),Danio);
 			if(DirecionX>0){m_sprite.setTextureRect(IntRect(86,0,86,109));}else{m_sprite.setTextureRect(IntRect(86*4,109,86,109));}
@@ -44,12 +44,13 @@ void Enemigos::Movimiento(){
 	if(PersonajeVisto && RangoAtaque<=DistAPers ){
 		if(!ObstaculoDe && DirecionX>=0){
 			if(timer.getElapsedTime().asSeconds()<=0.3){
-				m_sprite.setTextureRect(IntRect(0,0,86,109));
-			}else if(timer.getElapsedTime().asSeconds()<=0.8 && timer.getElapsedTime().asSeconds()>0.3){
-				m_sprite.setTextureRect(IntRect(86*1,0,86,109));
-			}
-			else{
 				m_sprite.setTextureRect(IntRect(86*2,0,86,109));
+			}else if(timer.getElapsedTime().asSeconds()<=0.6 && timer.getElapsedTime().asSeconds()>0.3){
+				m_sprite.setTextureRect(IntRect(86*3,0,86,109));
+			}else if(timer.getElapsedTime().asSeconds()<=0.9 && timer.getElapsedTime().asSeconds()>0.6){
+				m_sprite.setTextureRect(IntRect(86*4,0,86,109));
+			}else{
+				m_sprite.setTextureRect(IntRect(86*5,0,86,109));
 				if(timer.getElapsedTime().asSeconds()>=1.3){timer.restart();}
 			}
 			Posicion.x+=Velocidad.x*DirecionX;
@@ -58,12 +59,13 @@ void Enemigos::Movimiento(){
 		
 		if(!ObstaculoIz && DirecionX<=0){
 			if(timer.getElapsedTime().asSeconds()<=0.3){
-				m_sprite.setTextureRect(IntRect(86*2,109,86,109));
-			}else if(timer.getElapsedTime().asSeconds()<=0.8 && timer.getElapsedTime().asSeconds()>0.3){
 				m_sprite.setTextureRect(IntRect(86*3,109,86,109));
-			}
-			else{
-				m_sprite.setTextureRect(IntRect(86*4,109,86,109));
+			}else if(timer.getElapsedTime().asSeconds()<=0.6 && timer.getElapsedTime().asSeconds()>0.3){
+				m_sprite.setTextureRect(IntRect(86*2,109,86,109));
+			}else if(timer.getElapsedTime().asSeconds()<=0.9 && timer.getElapsedTime().asSeconds()>0.6){
+				m_sprite.setTextureRect(IntRect(86*1,109,86,109));
+			}else{
+				m_sprite.setTextureRect(IntRect(86*0,109,86,109));
 				if(timer.getElapsedTime().asSeconds()>=1.3){timer.restart();}
 			}
 			Posicion.x+=Velocidad.x*DirecionX;

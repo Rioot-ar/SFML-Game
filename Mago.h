@@ -12,6 +12,7 @@ public:
 	bool Atacar ( )override;
 	void Movimiento  (  )override;
 	void VerificarDist(Vector2f Per);
+	Text Informacion(unsigned TV)override;
 
 private:
 	float VelProyectil;
