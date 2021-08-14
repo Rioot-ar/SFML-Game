@@ -4,8 +4,9 @@
 
 class Bandidos : public Enemigos {
 public:
-	Bandidos(Vector2f pos);
+	Bandidos(sf::Vector2f pos);
 	bool Atacar ( )override;
+	~Bandidos(	);
 private:
 };
 

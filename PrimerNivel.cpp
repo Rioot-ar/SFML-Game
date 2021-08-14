@@ -14,13 +14,13 @@
 #include "Bandidos.h"
 #include "Objetivo.h"
 
+using namespace sf;
+
 PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	
-	FondoEscena= new Texture;
-	FondoE= new Sprite;
+	//Fondo del nivel, la escala en x se la deja fija para no perder tanta calidad en imagen
 	Piso= new Texture;
-	TObjetivo=new Texture;
-	
+	TObjetivo=new Texture;	
 	Piso->loadFromFile("Recursos/Estructuras/PisoPrimerNivel.png");
 	TObjetivo->loadFromFile("Recursos/Estructuras/Castillo.png");
 	FondoEscena->loadFromFile("Recursos/Estructuras/FondoNivel.png");
@@ -28,6 +28,8 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	FondoE->setTexture(*FondoEscena);
 	FondoE->setOrigin(0,FondoE->getGlobalBounds().height);
 	FondoE->setScale(1,TamanioVentana.y/FondoEscena->getSize().y);
+	FondoE->setPosition(-600,600);
+	
 	
 	Dificultad=SDificultad;
 	
@@ -103,13 +105,13 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	//Objetivo
 	Objetos.push_back(new Objetivo(Vector2f(400,200),Vector2f(3500,550),TObjetivo));
 	
-	FondoE->setPosition(-600,600);
 	
-	
+	//Camara que seguira al jugador en x, esta fija en y
 	m_camara1 = new View;
 	m_camara1->setSize(800.f,600.f);
 	m_camara1->setCenter(0,300);
 	
+	//Musica nivel
 	MusicaPrincipal.openFromFile("Recursos/Utiles/MPrimerNivel.ogg");
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
@@ -118,7 +120,9 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 }
 
 
+
 void PrimerNivel::TerminarPartida (Juego & game) {
+	//Final 1, el jugador termino el nivel. Final 2 el jugador murio
 	if(Jugador->ObtenerSalud()>0){
 		Jugador->consultarPuntos()+=100;
 		game.SetEscena(new SegundoNivel(Dificultad,Jugador));

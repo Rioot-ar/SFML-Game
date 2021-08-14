@@ -2,7 +2,7 @@
 #define MAGO_H
 #include "Personaje.h"
 #include "Proyectil.h"
-using namespace std;
+
 
 class Mago : public Personaje {
 public:
@@ -11,12 +11,12 @@ public:
 	void habilidadEspecial  ( )override;
 	bool Atacar ( )override;
 	void Movimiento  (  )override;
-	void VerificarDist(Vector2f Per);
-	Text Informacion(unsigned TV)override;
+	void VerificarDist(sf::Vector2f Per);
+	sf::Text Informacion(unsigned TV)override;
 
 private:
 	float VelProyectil;
-	Texture* AtaqueEspecial;
+	sf::Texture* AtaqueEspecial;
 };
 
 #endif

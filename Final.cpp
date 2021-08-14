@@ -4,27 +4,32 @@
 #include "Puntaje.h"
 #include "Honderos.h"
 #include "JefeFinal.h"
+#include "Objetivo.h"
+using namespace sf;
 
 Final::Final(char SDificultad, Personaje* J) {
 	
-	FondoEscena= new Texture;
-	FondoE= new Sprite;
+	TObjetivo=new Texture;
+	
+	
+	
+	//Fondo del nivel, la escala en x se la deja fija para no perder tanta calidad en imagen
 	FondoEscena->loadFromFile("Recursos/Estructuras/FondoFinal.png");
-	
-	Piso= new Texture;
-	Piso->loadFromFile("Recursos/Estructuras/PisoSegundoNivel.png");
-	
-//	TObjetivo=new Texture;
-//	TObjetivo->loadFromFile("")
-	
 	FondoE->setTexture(*FondoEscena);
 	FondoE->setOrigin(0,FondoE->getGlobalBounds().height);
 	FondoE->setScale(1,TamanioVentana.y/FondoEscena->getSize().y);
+	FondoE->setPosition(-600,600);
 	
+	
+	//Me llevo al jugador a la escena actual
 	J->VolverInicio();
 	Jugador= J;
+	
 	Dificultad=SDificultad;
+	
 	//Piso
+	Piso= new Texture;
+	Piso->loadFromFile("Recursos/Estructuras/PisoSegundoNivel.png");
 	Objetos.push_back(new Plataforma(Vector2f(1500,50),Vector2f(20,550),Piso));
 
 	
@@ -39,20 +44,23 @@ Final::Final(char SDificultad, Personaje* J) {
 	Malosmalosos.push_back(new JefeFinal(Vector2f(800,200),Dificultad));
 
 	
-
 	
-	FondoE->setPosition(-600,600);
+	//Camara que seguira al jugador en x, esta fija en y
 	m_camara1 = new View;
 	m_camara1->setSize(800.f,600.f);
 	m_camara1->setCenter(0,300);
 	
+	
+	//Musica del nivel
 	MusicaPrincipal.openFromFile("Recursos/Utiles/MFinal.ogg");
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
 	MusicaPrincipal.play();
 }
 
+
 void Final::TerminarPartida (Juego & game) {
+	//Final 1, el jugador mato al Jefe. Final 2 el jugador murio
 	if(Jugador->ObtenerSalud()>0){
 		game.SetEscena(new Puntaje(Jugador->consultarPuntos()+=400));
 	}else{

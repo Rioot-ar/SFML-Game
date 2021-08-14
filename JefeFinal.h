@@ -4,11 +4,12 @@
 
 class JefeFinal : public Enemigos {
 public:
-	JefeFinal(Vector2f Posicion, char Dificultad);
+	JefeFinal(sf::Vector2f Posicion, char Dificultad);
 	void habilidadEspecial ( );
+	~JefeFinal( );
 private:
-	Clock HabilidadEsp;
-	Texture* AtaqueEspecial;
+	sf::Clock HabilidadEsp;
+	sf::Texture* AtaqueEspecial;
 	float VelHabilidad;
 };
 

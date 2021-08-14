@@ -1,6 +1,9 @@
 #include "Asesino.h"
+using namespace sf;
 
 Asesino::Asesino(Vector2f pos) {
+	
+	//Normas
 	velEst=1;
 	Salud=1;
 	Defensa=0;
@@ -14,6 +17,7 @@ Asesino::Asesino(Vector2f pos) {
 	RangoVision=10.f;
 	RangoAtaque=5.f;
 	
+	//Visual
 	m_ataque->loadFromFile("Recursos/Utiles/AtaqueFuego.png");
 	Apariencia->loadFromFile("Recursos/Personajes/Bandido.png");
 	m_sprite.setTexture(*Apariencia);
@@ -22,5 +26,10 @@ Asesino::Asesino(Vector2f pos) {
 	m_sprite.setScale(0.3,0.3);
 	m_sprite.setPosition(Posicion);
 	m_sprite.setColor(Color(1,1,1,20));
+}
+
+
+Asesino::~Asesino ( ) {
+	
 }
 

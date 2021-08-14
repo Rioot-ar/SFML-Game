@@ -4,7 +4,7 @@
 
 class Honderos : public Enemigos {
 public:
-	Honderos(Vector2f pos);
+	Honderos(sf::Vector2f pos);
 private:
 };
 

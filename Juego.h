@@ -1,20 +1,21 @@
 #ifndef JUEGO_H
 #define JUEGO_H
-#include <SFML/Graphics.hpp>
 #include "Escena.h"
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+
 class Escena;
-using namespace sf;
 
 class Juego {
 public:
 	Juego();
 	void Run();
 	void SetEscena(Escena *nueva);
-	Event *ObtenerEvento(){return &e;}
+	sf::Event *ObtenerEvento(){return &e;}
 	~Juego();
-	RenderWindow Ventana;
+	sf::RenderWindow Ventana;
 private:
-	Event e;
+	sf::Event e;
 	Escena *Actual;
 	Escena *m_siguiente_escena = nullptr;
 };
