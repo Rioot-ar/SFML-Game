@@ -1,22 +1,22 @@
 #ifndef CAZADOR_H
 #define CAZADOR_H
 #include "Personaje.h"
-#include <cmath>
-using namespace std;
+
 
 class Cazador : public Personaje {
 public:
 	Cazador();
 	void habilidadEspecial ( );
 	void Movimiento ( );
-	void VerificarDist (Vector2f Per);
-	Text Informacion(unsigned TV)override;
+	void VerificarDist (sf::Vector2f Per);
+	sf::Text Informacion(unsigned TV)override;
 	bool Atacar ( );
+	~Cazador(	);
 private:
-	Clock HAbInven;
+	sf::Clock HAbInven;
 	bool habilidadActivada;
 	float VelProyectil;
-	Texture* AtaqueEspecial;
+
 };
 
 #endif

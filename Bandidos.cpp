@@ -1,10 +1,13 @@
 #include "Bandidos.h"
-#include <iostream>
+
 using namespace std;
+using namespace sf;
 
 Bandidos::Bandidos(Vector2f pos) {
+	
+	//normas
 	velEst=2;
-	Salud=50;
+	Salud=10;
 	Defensa=1.5;
 	Danio=3;
 	Velocidad=Vector2f(2,5);
@@ -16,6 +19,7 @@ Bandidos::Bandidos(Vector2f pos) {
 	RangoVision=200.f;
 	RangoAtaque=10.f;
 	
+	//visual
 	m_ataque->loadFromFile("Recursos/Utiles/AtaqueCaba.png");
 	Apariencia->loadFromFile("Recursos/Personajes/Bandido.png");
 	m_sprite.setTexture(*Apariencia);
@@ -25,11 +29,13 @@ Bandidos::Bandidos(Vector2f pos) {
 	m_sprite.setPosition(Posicion);
 }
 
-bool Bandidos::Atacar ( ) {
 
+
+bool Bandidos::Atacar ( ) {
 	if(RangoAtaque>=DistAPers){
 		if(this->PuedeAtacar()){
 			m_proyectil = Proyectil(0.f,m_ataque,Vector2f(DirecionX,0),Vector2f(m_sprite.getPosition().x,m_sprite.getPosition().y),Danio);
+			//seleccion de textura, segun el lugar que ataco
 			if(DirecionX>0){m_sprite.setTextureRect(IntRect(86,0,86,109));}else{m_sprite.setTextureRect(IntRect(86*4,109,86,109));}
 			return true;
 		}
@@ -37,3 +43,8 @@ bool Bandidos::Atacar ( ) {
 	}else{return false;}
 	
 }
+
+Bandidos::~Bandidos ( ) {
+	
+}
+

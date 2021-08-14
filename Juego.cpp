@@ -21,7 +21,7 @@ void Juego::Run(){
 		Actual->Dibujar(Ventana);
 		
 		if(m_siguiente_escena){
-			Actual->EntreEscena(Ventana);			
+			Actual->CambioEscena(Ventana);	
 			delete Actual;
 			Actual=m_siguiente_escena;
 			m_siguiente_escena= nullptr;

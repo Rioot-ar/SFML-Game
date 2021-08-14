@@ -4,7 +4,8 @@
 
 class Asesino : public Enemigos {
 public:
-	Asesino(Vector2f pos);
+	Asesino(sf::Vector2f pos);
+	~Asesino(	);
 private:
 };
 

@@ -1,19 +1,17 @@
 #ifndef CABALLERO_H
 #define CABALLERO_H
 #include "Personaje.h"
-#include <SFML/System/Clock.hpp>
-using namespace std;
 
 class Caballero : public Personaje {
 public:
 	Caballero();
 	void habilidadEspecial ( );
 	void Movimiento ( );
-	Text Informacion(unsigned TV)override;
-	void VerificarDist (Vector2f Per);
+	sf::Text Informacion(unsigned TV)override;
 	bool Atacar ( );
+	~Caballero(	);
 private:
-	Clock HAbInven;
+	sf::Clock HAbInven;
 	bool habilidadActivada;
 };
 

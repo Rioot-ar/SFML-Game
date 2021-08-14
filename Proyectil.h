@@ -1,16 +1,16 @@
 #ifndef PROYECTIL_H
 #define PROYECTIL_H
 #include <SFML/Graphics.hpp>
-using namespace sf;
+
 class Proyectil {
 public:
-	Proyectil(float R, Texture* T,Vector2f V,Vector2f Pi, float D);
+	Proyectil(float R, sf::Texture* T,sf::Vector2f V,sf::Vector2f Pi, float D);
 	Proyectil();
-	Sprite ObtenerForma(){return m_sprite;}
-	float ObDanio(){return m_danio;}
-	void Impacto(){m_sprite=Sprite(); activo=false;}
-	bool Existe(){return activo;}
-	float ObtenerDistancia(){return DistRecorrida;}
+	sf::Sprite ObtenerForma()const{return m_sprite;}
+	float ObDanio()const{return m_danio;}
+	void Impacto(){m_sprite=sf::Sprite(); activo=false;}
+	bool Existe()const{return activo;}
+	float ObtenerDistancia()const{return DistRecorrida;}
 	void Movimiento();
 	~Proyectil();
 private:
@@ -18,7 +18,7 @@ private:
 	float m_rango;
 	float m_danio;
 	float DistRecorrida;
-	Sprite m_sprite;
-	Vector2f m_velocidad, m_posicioninicial;
+	sf::Sprite m_sprite;
+	sf::Vector2f m_velocidad, m_posicioninicial;
 };
 #endif

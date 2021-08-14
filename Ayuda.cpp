@@ -1,7 +1,7 @@
 #include "Ayuda.h"
 #include <SFML/Graphics.hpp>
 #include "Menu.h"
-
+using namespace sf;
 Ayuda::Ayuda() {
 	Vector2f TamanioVentana = {800,600};
 	
@@ -41,8 +41,11 @@ Ayuda::Ayuda() {
 }
 void Ayuda::Actualizar (Juego & game) {
 	
-	TamanioVentana = Vector2f(game.Ventana.getSize());
+	//Acomodar vista al centro de la ventana
+	TamanioVentana = Vector2f(game.Ventana.getSize());	
 	game.Ventana.setView(View(Vector2f(TamanioVentana.x/2,TamanioVentana.y/2),TamanioVentana));
+	
+	//Obtener posicion del puntero
 	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
 	Rect<float> mouse(MousePoss.x,MousePoss.y,1,1);
 	
@@ -62,10 +65,15 @@ void Ayuda::Actualizar (Juego & game) {
 	PersonajesContenido.setCharacterSize(TamanioVentana.x*0.03);
 	PersonajesContenido.setPosition(0,TamanioVentana.y*0.1);
 	
-	
+	//Volver al menu
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)){
 		game.SetEscena(new Menu);
 	}
+	
+	///Segun lo que apunte el mouse mostrar ayuda
+	//1--Controles 
+	//2--Dificultad 
+	//3--Personajes
 	if(ControlesTitulo.getGlobalBounds().intersects(mouse)){
 		QueMostrar = 1;
 	}

@@ -1,12 +1,14 @@
 #include "Menu.h"
 #include <SFML/Graphics.hpp>
-#include <SFML/Window/Mouse.hpp>
+#include <SFML/Window.hpp>
 #include "Juego.h"
 #include "SeleccionDePersonaje.h"
 #include "Ayuda.h"
 #include "Puntaje.h"
 using namespace std;
 using namespace sf;
+
+//Funcion para crear texto "Orig" sirve para verificar si es necesario cambiar el origen del Text
 void CargarTexto(Text &Tipo, int Tamano, String Texto, Vector2f Posicion, const Font &Fuente, int Orig=0) {
 	Tipo.setFont(Fuente);
 	Tipo.setCharacterSize(Tamano);
@@ -19,37 +21,47 @@ void CargarTexto(Text &Tipo, int Tamano, String Texto, Vector2f Posicion, const 
 
 
 
+
 Menu::Menu(){
-	FondoEscena= new Texture;
-	FondoE= new Sprite;
-	FondoEscena->loadFromFile("Recursos/Estructuras/Fondo.PNG");
 	
+	//Fondo del menu
+	FondoEscena->loadFromFile("Recursos/Estructuras/Fondo.PNG");	
 	FondoE->setTexture(*FondoEscena);
 	FondoE->setPosition(0,0);
 	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
-	FlechaM= new Sprite;
+	
+	//Flecha de seleccion
+	FlechaM->setTexture(*FlechaMenu);
+	FlechaM->setOrigin(FlechaM->getGlobalBounds().height,FlechaM->getGlobalBounds().height/2.f);
+	
+	//Texto a mostrar en pantalla
 	CargarTexto(Titulo, 70, "Kingdom",Vector2f( TamanioVentana.x/2.f,0),*fuente,1 );
 	CargarTexto(MenuInicio, 30, "Iniciar Partida",Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0.25),*fuente );
 	CargarTexto(MenuOpciones, 30, "Ayuda",Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0.5),*fuente );
 	CargarTexto(MenuPuntajes, 30, "Puntajes",Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0.75),*fuente );
 	
+	//Musica del nivel
 	MusicaPrincipal.openFromFile("Recursos/Utiles/MenuP.ogg");
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
 	MusicaPrincipal.play();
 	
-	FlechaM->setTexture(*FlechaMenu);
-	FlechaM->setOrigin(FlechaM->getGlobalBounds().height,FlechaM->getGlobalBounds().height/2.f);
-
+	
 	
 }
+
 void Menu::Actualizar(Juego &game){
+	
 	TamanioVentana = Vector2f(game.Ventana.getSize());
-	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
-	game.Ventana.setView(View(Vector2f(TamanioVentana.x/2.f,TamanioVentana.y/2.f),TamanioVentana));	
 	e=game.ObtenerEvento();
-	FlechaM->setScale(TamanioVentana.x*0.0005,TamanioVentana.x*0.0005);
 ///Acomodar	
+	//View de la ventana 
+	game.Ventana.setView(View(Vector2f(TamanioVentana.x/2.f,TamanioVentana.y/2.f),TamanioVentana));	
+	//Fondo y flecha de seleccion
+	FondoE->setScale(TamanioVentana.x/FondoEscena->getSize().x,TamanioVentana.y/FondoEscena->getSize().y);
+	FlechaM->setScale(TamanioVentana.x*0.0005,TamanioVentana.x*0.0005);
+
+	//Texto
 	Titulo.setCharacterSize(TamanioVentana.x*0.0875);
 	Titulo.setOrigin(Titulo.getGlobalBounds().width/2,0);
 	Titulo.setPosition(Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0));
@@ -67,10 +79,13 @@ void Menu::Actualizar(Juego &game){
 	MenuPuntajes.setPosition(Vector2f( TamanioVentana.x/2.f,TamanioVentana.y*0.75));
 	
 	
-//	Seleccion Con Mouse-----------------------------------------------------------
+///	Seleccion Con Mouse-----------------------------------------------------------
+	
+	//Posicion del mouse en la ventana
 	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
 	Rect<float> mouse(MousePoss.x,MousePoss.y,1,1);
-		
+	
+	//Si el puntero intersecta con el texto, entonces mover la flecha de seleccion hacia la izquierda del texto, ademas habilitar la opcion de cambiar la escena
 	if(MenuInicio.getGlobalBounds().intersects(mouse)){
 		FlechaM->setPosition(MenuInicio.getPosition().x,MenuInicio.getPosition().y+MenuInicio.getGlobalBounds().height);
 		if(Keyboard::isKeyPressed(Keyboard::Key::Return) or Mouse::isButtonPressed(Mouse::Left)){
@@ -106,10 +121,6 @@ void Menu::Dibujar(RenderWindow &Vent){
 
 
 Menu::~Menu ( ) {
-	delete FondoEscena;
-	delete FondoE;
-	delete FlechaM;
-	delete fuente;
-	delete FlechaMenu;
+
 }
 
