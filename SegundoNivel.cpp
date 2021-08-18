@@ -43,15 +43,15 @@ SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 	Objetos.push_back(new Plataforma(Vector2f(400,25),Vector2f(1025,305),Piso));
 	Objetos.push_back(new Plataforma(Vector2f(400,25),Vector2f(1025,500),Piso));
 	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(1780,500),Piso));
-	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2130,350),Piso));
-	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2205,350),Piso));
-	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(2370,425),Piso));
-	Objetos.push_back(new Plataforma(Vector2f(300,25),Vector2f(2670,350),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2090,450),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(25,25),Vector2f(2205,450),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(2320,425),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(300,25),Vector2f(2600,350),Piso));
 	
 	//Objetivo
 	TObjetivo=new Texture;
 	TObjetivo->loadFromFile("Recursos/Estructuras/Puerta.png");
-	Objetos.push_back(new Objetivo(Vector2f(50,100),Vector2f(4050,576),TObjetivo));
+	Objetos.push_back(new Objetivo(Vector2f(50,100),Vector2f(3950,576),TObjetivo));
 	
 	//Dificultad, Define numero de enemigos y tipo de enemigos
 	switch(Dificultad){
@@ -59,16 +59,16 @@ SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 		for(int i=1;i<21;i++) { 
 			switch(int Tipo=rand()%2){
 			case 0:
-				Malosmalosos.push_back(new Honderos(Vector2f(250*i,350)));
+				Malosmalosos.push_back(new Honderos(Vector2f(200*i,350)));
 				break;
 			case 1:
-				Malosmalosos.push_back(new Bandidos(Vector2f(250*i,350)));
+				Malosmalosos.push_back(new Bandidos(Vector2f(200*i,350)));
 				break;
 			}
 		}
 		break;
 	case 'D':
-		for(int i=1;i<2;i++) { 
+		for(int i=1;i<26;i++) { 
 			switch(int Tipo=rand()%3){
 			case 0:
 				Malosmalosos.push_back(new Honderos(Vector2f(150*i,350)));

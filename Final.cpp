@@ -9,9 +9,7 @@ using namespace sf;
 
 Final::Final(char SDificultad, Personaje* J) {
 	
-	TObjetivo=new Texture;
-	
-	
+
 	
 	//Fondo del nivel, la escala en x se la deja fija para no perder tanta calidad en imagen
 	FondoEscena->loadFromFile("Recursos/Estructuras/FondoFinal.png");
@@ -39,6 +37,10 @@ Final::Final(char SDificultad, Personaje* J) {
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(600,475),Piso));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1000,475),Piso));
 
+	//Objetivo
+	TObjetivo=new Texture;
+	TObjetivo->loadFromFile("Recursos/Estructuras/Escotilla.png");
+	Objetos.push_back(new Objetivo(Vector2f(100,10),Vector2f(1380,550),TObjetivo));
 	
 	//Jefe
 	Malosmalosos.push_back(new JefeFinal(Vector2f(800,200),Dificultad));

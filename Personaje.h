@@ -17,7 +17,7 @@ public:
 	sf::Sprite ObtenerSprite()const{return m_sprite;}
 	virtual void Movimiento()=0;
 	virtual void habilidadEspecial()=0;
-	void Colision(std::vector<Objeto*> G);
+	void Colision(const std::vector<Objeto*>  G);
 	virtual bool PuedeAtacar() ;
 	Proyectil* ObtenerProyectil(){return &m_proyectil;}
 	bool RecibirDanio(Proyectil *D);

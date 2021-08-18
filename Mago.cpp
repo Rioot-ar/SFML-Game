@@ -140,7 +140,7 @@ void Mago::VerificarDist (Vector2f Per) {
 	
 }
 
-//Informacion que se en en la pantalla de los niveles
+//Informacion que se muestra en en la pantalla de los niveles
 Text Mago::Informacion (unsigned TV ) {
 	
 	string aux;

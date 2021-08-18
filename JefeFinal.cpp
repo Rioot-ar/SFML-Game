@@ -32,10 +32,10 @@ JefeFinal::JefeFinal(Vector2f pos,char Dificultad) {
 		Defensa = 2;
 		Danio = 10;
 		Salto = 5;
-		puntos=150;
+		puntos=200;
 		break;
 	case 'D':
-		Salud = 1;
+		Salud = 300;
 		Defensa = 3;
 		Danio = 15;
 		Salto = 5;
@@ -43,7 +43,9 @@ JefeFinal::JefeFinal(Vector2f pos,char Dificultad) {
 		break;
 	}
 	
-	
+	//Fuente para la vida y habilidad que se mostrara en pantalla
+	Font* fuente=new Font;fuente->loadFromFile("Recursos/Utiles/Informacion.ttf");
+	TInformacion->setFont(*fuente);	
 }
 
 ///Cada 15 segundos el Jefe hace un ataque poderoso y se teletransporta, HabilidadEsp verifica el tiempo
@@ -66,5 +68,20 @@ void JefeFinal::habilidadEspecial ( ) {
 
 JefeFinal::~JefeFinal ( ) {
 	delete AtaqueEspecial;
+}
+
+
+//Informacion que se muestra en en la pantalla de los niveles
+Text JefeFinal::Informacion (unsigned TV ) {
+	
+	string aux;
+	aux="Vida: "+to_string((int)Salud);	
+
+	TInformacion->setCharacterSize(TV*0.02);
+	TInformacion->setString(aux);
+	TInformacion->setOrigin(TInformacion->getGlobalBounds().width/2,TInformacion->getGlobalBounds().height);
+	TInformacion->setPosition(m_sprite.getPosition().x,m_sprite.getPosition().y-m_sprite.getGlobalBounds().height/2);
+	
+	return *TInformacion;
 }
 

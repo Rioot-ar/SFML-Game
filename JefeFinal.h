@@ -6,6 +6,7 @@ class JefeFinal : public Enemigos {
 public:
 	JefeFinal(sf::Vector2f Posicion, char Dificultad);
 	void habilidadEspecial ( );
+	sf::Text Informacion(unsigned TV)override;
 	~JefeFinal( );
 private:
 	sf::Clock HabilidadEsp;

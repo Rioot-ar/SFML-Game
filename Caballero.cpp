@@ -18,8 +18,8 @@ Caballero::Caballero() {
 	SonidoAtaque.setVolume(40);
 	
 	//Normas
-	velEst=1.5;
-	Velocidad.x=1.5;
+	velEst=2;
+	Velocidad.x=2;
 	Velocidad.y=0;
 	Posicion=m_sprite.getPosition();
 	Salud = 150;
@@ -148,7 +148,7 @@ bool Caballero::Atacar ( ) {
 	
 }
 
-//Informacion que se en en la pantalla de los niveles
+//Informacion que se muestra en en la pantalla de los niveles
 Text Caballero::Informacion (unsigned TV ) {
 	
 	string aux;

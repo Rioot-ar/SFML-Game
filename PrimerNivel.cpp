@@ -53,7 +53,7 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 		for(int i=1;i<16;i++) { 
 			switch(int Tipo=rand()%2){
 			case 0:
-				Malosmalosos.push_back(new Honderos(Vector2f(250*i,200)));
+				Malosmalosos.push_back(new Honderos(Vector2f(215*i,200)));
 				break;
 			case 1:
 				Malosmalosos.push_back(new Bandidos(Vector2f(215*i,200)));
@@ -95,9 +95,9 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(925,330),Piso));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1170,360),Piso));
 	Objetos.push_back(new Plataforma(Vector2f(250,25),Vector2f(1400,360),Piso));
-	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1750,300),Piso));
-	Objetos.push_back(new Plataforma(Vector2f(120,25),Vector2f(2050,300),Piso));
-	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(2300,300),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(1750,360),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(120,25),Vector2f(1950,360),Piso));
+	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(2150,360),Piso));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(2800,475),Piso));
 	Objetos.push_back(new Plataforma(Vector2f(200,25),Vector2f(3000,355),Piso));
 	Objetos.push_back(new Plataforma(Vector2f(100,25),Vector2f(3050,475),Piso));
