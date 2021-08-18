@@ -25,7 +25,7 @@ Asesino::Asesino(Vector2f pos) {
 	m_sprite.setOrigin(m_sprite.getGlobalBounds().width,m_sprite.getGlobalBounds().height/2);
 	m_sprite.setScale(0.3,0.3);
 	m_sprite.setPosition(Posicion);
-	m_sprite.setColor(Color(1,1,1,20));
+	m_sprite.setColor(Color(1,1,1,50));
 }
 
 

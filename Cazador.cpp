@@ -139,7 +139,7 @@ bool Cazador::Atacar ( ) {
 	}else{return false;}
 }
 
-//Informacion que se en en la pantalla de los niveles
+//Informacion que se muestra en en la pantalla de los niveles
 Text Cazador::Informacion (unsigned TV ) {
 	
 	string aux;

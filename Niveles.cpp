@@ -4,6 +4,7 @@
 #include "Plataforma.h"
 #include <list>
 #include "Puntaje.h"
+#include <iostream>
 using namespace std;
 using namespace sf;
 
@@ -12,6 +13,7 @@ Niveles::Niveles (char Dificultad, char SPersonaje) {
 }
 
 void Niveles::Actualizar (Juego & game) {
+	cout<<"( "<<Jugador->ObtenerSprite().getPosition().x<<" , "<<Jugador->ObtenerSprite().getPosition().y<<" )"<<endl;
 	TamanioVentana = Vector2f(game.Ventana.getSize());
 	//Salir al menu
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)){
@@ -63,7 +65,7 @@ void Niveles::Actualizar (Juego & game) {
 	Jugador->ObtenerProyectil()->Movimiento();
 
 	///Objetos.size()-1 el ultimo objeto insertado es el destino del jugador
-	if(Jugador->ObtenerSprite().getGlobalBounds().intersects(Objetos[Objetos.size()-1]->ObtenerForma()->getGlobalBounds()) && Objetos[Objetos.size()-1]->EsObjetivo()){
+	if(Malosmalosos.empty() && Jugador->ObtenerSprite().getGlobalBounds().intersects(Objetos[Objetos.size()-1]->ObtenerForma()->getGlobalBounds()) && Objetos[Objetos.size()-1]->EsObjetivo()){
 		Termino=true;
 	}
 	
@@ -98,6 +100,7 @@ void Niveles::Dibujar (RenderWindow & Vent) {
 	for(list<Personaje*>::iterator it=Malosmalosos.begin();it!=Malosmalosos.end();++it) { 
 		Vent.draw((*it)->ObtenerSprite());
 		Vent.draw((*it)->ObtenerProyectil()->ObtenerForma());
+		Vent.draw((*it)->Informacion(m_camara1->getSize().x));
 	}
 	Vent.display();
 }

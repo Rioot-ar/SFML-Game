@@ -24,7 +24,7 @@ Ayuda::Ayuda() {
 	
 	DificultadContenido.setFont(*fuente);
 	DificultadContenido.setCharacterSize(25);
-	DificultadContenido.setString("En la dificultad normal los enemigos son mas debiles y menos numerosos,\nel numero de puntos recibidos por terminar un nivel es menor\n\nEn dificil hay mayor cantidad y variedad de enemigos, que ademas son\nmas fuertes ");
+	DificultadContenido.setString("En la dificultad normal los enemigos son menos numerosos,\nel numero de puntos recibidos por terminar un nivel es menor\n\nEn dificil hay mayor cantidad y variedad de enemigos");
 
 	
 	//Texto Personajes---------------------------
@@ -35,7 +35,7 @@ Ayuda::Ayuda() {
 	
 	PersonajesContenido.setFont(*fuente);
 	PersonajesContenido.setCharacterSize(25);
-	PersonajesContenido.setString("Caballero: Personaje con mayor salud y defensa, su habilidad especial\nle cura completamente y lo hace intocable durante 10 segundos\n\nCazador: Personaje equilibrado en su ataque y defensa, su habilidad\nespecial aumenta su daño y su velocidad de ataque\n\nMago: Personaje con mayor daño y poco aguante, su habilidad especial\nconsiste en un ataque en area con un daño elevado");
+	PersonajesContenido.setString("Caballero: Personaje con mayor salud y defensa, su habilidad especial\nle cura completamente y lo hace intocable durante 10 segundos\n\nCazador: Personaje equilibrado en su ataque y defensa, su habilidad\nespecial aumenta su daño y su velocidad de ataque\n\nMago: Personaje con mayor daño y poco aguante, su habilidad especial\nconsiste en un ataque de daño elevado");
 
 	
 }

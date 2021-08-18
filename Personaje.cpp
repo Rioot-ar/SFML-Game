@@ -116,6 +116,6 @@ Vector2f Personaje::CalcularVelocidad (float Pend, float VELP, int DIR) {
 }
 
 Text Personaje::Informacion (unsigned TV) {
-	
+	return Text();
 }
 

@@ -46,7 +46,7 @@ void Escena::CambioEscena (RenderWindow & Ventana) {
 	Clock Transicion;
 	int alp=0;
 	float son=25;
-	while(Transicion.getElapsedTime().asSeconds()<=2){
+	while(Transicion.getElapsedTime().asSeconds()<=3){
 		MusicaPrincipal.setVolume(MusicaPrincipal.getVolume()-son*Transicion.getElapsedTime().asSeconds());		
 		EntreEscena.setColor(Color(1,1,1,alp));
 		alp+=1;
