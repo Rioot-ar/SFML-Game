@@ -4,7 +4,6 @@
 #include "Plataforma.h"
 #include <list>
 #include "Puntaje.h"
-#include <iostream>
 using namespace std;
 using namespace sf;
 
@@ -13,7 +12,6 @@ Niveles::Niveles (char Dificultad, char SPersonaje) {
 }
 
 void Niveles::Actualizar (Juego & game) {
-	cout<<"( "<<Jugador->ObtenerSprite().getPosition().x<<" , "<<Jugador->ObtenerSprite().getPosition().y<<" )"<<endl;
 	TamanioVentana = Vector2f(game.Ventana.getSize());
 	//Salir al menu
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)){

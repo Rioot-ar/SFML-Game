@@ -1,6 +1,5 @@
 #include "Escena.h"
 #include <SFML/Graphics.hpp>
-#include <iostream>
 using namespace sf;
 using namespace std;
 Escena::Escena() {
