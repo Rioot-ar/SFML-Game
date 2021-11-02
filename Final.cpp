@@ -5,8 +5,10 @@
 #include "Honderos.h"
 #include "JefeFinal.h"
 #include "Objetivo.h"
-using namespace sf;
+#include <string>
 
+using namespace sf;
+using namespace std;
 Final::Final(char SDificultad, Personaje* J) {
 	
 
@@ -58,6 +60,10 @@ Final::Final(char SDificultad, Personaje* J) {
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
 	MusicaPrincipal.play();
+	
+	EnemigosFaltantes = new Text;
+	EnemigosFaltantes->setFont(*fuente);
+	EnemigosFaltantes->setString("Te quedan "+to_string((int)Malosmalosos.size())+" enemigos para matar");
 }
 
 

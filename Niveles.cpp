@@ -60,6 +60,13 @@ void Niveles::Actualizar (Juego & game) {
 			break;
 		}
 	}
+	
+	
+	EnemigosFaltantes->setString("Te quedan "+to_string((int)Malosmalosos.size())+" enemigos para matar");
+	EnemigosFaltantes->setCharacterSize(m_camara1->getSize().x*0.02);
+	EnemigosFaltantes->setOrigin(EnemigosFaltantes->getGlobalBounds().width/2.f,0);
+	EnemigosFaltantes->setPosition(Jugador->ObtenerSprite().getPosition().x,50.f);
+	
 	Jugador->ObtenerProyectil()->Movimiento();
 
 	///Objetos.size()-1 el ultimo objeto insertado es el destino del jugador
@@ -83,6 +90,7 @@ void Niveles::Dibujar (RenderWindow & Vent) {
 	Vent.clear(Color(200,150,255,255));
 	//Fondo
 	Vent.draw(*FondoE);
+	Vent.draw(*EnemigosFaltantes);
 	//Dibujo objetos
 	for(size_t i=0;i<Objetos.size();i++) { 
 		Vent.draw(*Objetos[i]->ObtenerForma());
@@ -115,7 +123,7 @@ Niveles::~Niveles ( ) {
 		delete *it;
 	}
 	
-
+	delete EnemigosFaltantes;
 	delete Piso;
 	delete TObjetivo;
 

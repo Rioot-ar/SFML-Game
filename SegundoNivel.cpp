@@ -98,6 +98,12 @@ SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
 	MusicaPrincipal.play();
+	
+	
+	EnemigosFaltantes = new Text;
+	EnemigosFaltantes->setFont(*fuente);
+	EnemigosFaltantes->setString("Te quedan "+to_string((int)Malosmalosos.size())+" enemigos para matar");
+	
 }
 
 

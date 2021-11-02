@@ -27,7 +27,7 @@ protected:
 	sf::Texture* Piso;
 	sf::Texture* TObjetivo;
 	sf::Clock TiempoTranscurrido;
-	
+	sf::Text* EnemigosFaltantes;
 	
 };
 

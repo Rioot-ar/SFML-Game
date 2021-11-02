@@ -13,7 +13,9 @@
 #include "Asesino.h"
 #include "Bandidos.h"
 #include "Objetivo.h"
+#include <string>
 
+using namespace std;
 using namespace sf;
 
 PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
@@ -116,6 +118,12 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 	MusicaPrincipal.setLoop(true);
 	MusicaPrincipal.setVolume(50);
 	MusicaPrincipal.play();
+	
+	EnemigosFaltantes = new Text;
+	EnemigosFaltantes->setFont(*fuente);
+	EnemigosFaltantes->setString("Te quedan "+to_string((int)Malosmalosos.size())+" enemigos para matar");
+
+	
 	
 }
 
