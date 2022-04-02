@@ -20,8 +20,9 @@ Objetivo::Objetivo(Vector2f Tamanio, Vector2f Posicion,Texture* Nivel) {
 	CuadObB=FloatRect(Forma.getGlobalBounds().left,Forma.getGlobalBounds().top+Forma.getGlobalBounds().height+1.0,Forma.getGlobalBounds().width,1.f);
 }
 
-Objetivo::~Objetivo() {
 
+Objetivo::~Objetivo() {
+	SonidoObjetivo.stop();
 }
 
 

@@ -7,6 +7,7 @@ public:
 	Asesino(sf::Vector2f pos);
 	~Asesino(	);
 private:
+	
 };
 
 #endif

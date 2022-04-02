@@ -37,6 +37,7 @@
 * Version: 2014-02-19
 **/
 
+
 class InputBox:public sf::Text {
 	sf::Clock clock;
 	std::string value;

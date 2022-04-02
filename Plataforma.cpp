@@ -15,6 +15,7 @@ Plataforma::Plataforma(Vector2f Tamanio, Vector2f Posicion, Texture* Nivel) {
 	CuadObR=FloatRect(Forma.getGlobalBounds().left+Forma.getGlobalBounds().width+1,Forma.getGlobalBounds().top,1.0,Forma.getGlobalBounds().height);
 	CuadObB=FloatRect(Forma.getGlobalBounds().left,Forma.getGlobalBounds().top+Forma.getGlobalBounds().height+1.0,Forma.getGlobalBounds().width,1.f);
 }
+
 Plataforma::~Plataforma ( ) {
 
 }

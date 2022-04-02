@@ -2,6 +2,7 @@
 #define PROYECTIL_H
 #include <SFML/Graphics.hpp>
 
+
 class Proyectil {
 public:
 	Proyectil(float R, sf::Texture* T,sf::Vector2f V,sf::Vector2f Pi, float D);

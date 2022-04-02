@@ -3,6 +3,7 @@
 #include "Objeto.h"
 #include <SFML/Audio.hpp>
 
+
 class Objetivo : public Objeto {
 public:
 	Objetivo();

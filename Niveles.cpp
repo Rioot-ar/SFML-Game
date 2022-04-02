@@ -4,12 +4,15 @@
 #include "Plataforma.h"
 #include <list>
 #include "Puntaje.h"
+#include <iostream>
 using namespace std;
 using namespace sf;
 
 Niveles::Niveles (char Dificultad, char SPersonaje) {
 	
 }
+
+
 
 void Niveles::Actualizar (Juego & game) {
 	TamanioVentana = Vector2f(game.Ventana.getSize());
@@ -21,17 +24,17 @@ void Niveles::Actualizar (Juego & game) {
 	m_camara1->setCenter(Jugador->ObtenerSprite().getPosition().x,m_camara1->getCenter().y);
 	
 	
-	//Jugador 
-	///Visual
+	///Jugador
+	//Visual
 	Jugador->Colision(Objetos);
 	Jugador->Movimiento();
 	
-	///Mouse Respecto al personaje
+	//Mouse Respecto al personaje
 	Vector2i MousePoss=Mouse::getPosition(game.Ventana);
 	MousePoss.x=(MousePoss.x-TamanioVentana.x/2.f)*m_camara1->getSize().x/TamanioVentana.x;//Cambio escala
 	MousePoss.y=Jugador->ObtenerSprite().getPosition().y-m_camara1->getSize().y*MousePoss.y/TamanioVentana.y;//
 
-	///Ataque
+	//Ataque
 	Jugador->VerificarDist(Vector2f(MousePoss));
 	Jugador->Atacar();
 	Jugador->habilidadEspecial();
@@ -46,7 +49,11 @@ void Niveles::Actualizar (Juego & game) {
 			continue;
 		}
 		//Si el enemigo se cae del mapa, muere
-		if((*it)->ObtenerSprite().getPosition().y>m_camara1->getSize().y){(*it)->Matar();continue;}
+		if((*it)->ObtenerSprite().getPosition().y>m_camara1->getSize().y){
+			delete *it;
+			it=Malosmalosos.erase(it);
+			continue;
+		}
 		
 		(*it)->Colision(Objetos);
 		(*it)->VerificarDist(Jugador->ObtenerSprite().getPosition());

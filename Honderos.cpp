@@ -15,6 +15,7 @@ Honderos::Honderos(Vector2f pos) {
 	VelocidadAtaque=3;
 	RangoVision=200.f;
 	RangoAtaque=150.f;
+
 	
 	//Visual
 	m_ataque->loadFromFile("Recursos/Utiles/AtaqueFuego.png");

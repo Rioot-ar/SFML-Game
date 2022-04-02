@@ -16,7 +16,6 @@ private:
 	sf::Clock HAbInven;
 	bool habilidadActivada;
 	float VelProyectil;
-
 };
 
 #endif

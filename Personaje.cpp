@@ -87,6 +87,7 @@ bool Personaje::RecibirDanio (Proyectil *D) {
 }
 
 
+
 ///Verifica tiempo entre ataques. "true" si el tiempo entre un ataque y otro es mayor a la velocidad de ataque del personaje
 bool Personaje::PuedeAtacar ( ) {
 	if(m_puedeatk.getElapsedTime().asSeconds()>=VelocidadAtaque){

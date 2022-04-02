@@ -8,6 +8,7 @@ public:
 	bool Atacar ( )override;
 	~Bandidos(	);
 private:
+	
 };
 
 #endif

@@ -30,13 +30,16 @@ Bandidos::Bandidos(Vector2f pos) {
 }
 
 
-
 bool Bandidos::Atacar ( ) {
 	if(RangoAtaque>=DistAPers){
 		if(this->PuedeAtacar()){
 			m_proyectil = Proyectil(0.f,m_ataque,Vector2f(DirecionX,0),Vector2f(m_sprite.getPosition().x,m_sprite.getPosition().y),Danio);
 			//seleccion de textura, segun el lugar que ataco
-			if(DirecionX>0){m_sprite.setTextureRect(IntRect(86,0,86,109));}else{m_sprite.setTextureRect(IntRect(86*4,109,86,109));}
+			if(DirecionX>0){
+				m_sprite.setTextureRect(IntRect(86,0,86,109));
+			}else{
+				m_sprite.setTextureRect(IntRect(86*4,109,86,109));
+			}
 			return true;
 		}
 		

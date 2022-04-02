@@ -107,6 +107,7 @@ SegundoNivel::SegundoNivel(char SDificultad, Personaje* J) {
 }
 
 
+
 void SegundoNivel::TerminarPartida (Juego & game) {
 	//Final 1, el jugador termino el nivel. Final 2 el jugador murio
 	if(Jugador->ObtenerSalud()>0){

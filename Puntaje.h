@@ -12,7 +12,6 @@ struct Puntos{
 	int Puntuacion;
 };
 
-
 class Puntaje : public Escena {
 public:
 	Puntaje(int PP);

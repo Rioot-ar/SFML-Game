@@ -39,6 +39,7 @@ Escena::~Escena ( ) {
 	
 }
 
+
 ///Se ejecuta al final de cada escena
 void Escena::CambioEscena (RenderWindow & Ventana) {
 	EntreEscena.setScale(Ventana.getSize().x/(float)TEntreEscena->getSize().x,Ventana.getSize().y/(float)TEntreEscena->getSize().y);

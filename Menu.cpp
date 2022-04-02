@@ -108,6 +108,7 @@ void Menu::Actualizar(Juego &game){
 	
 
 }
+
 void Menu::Dibujar(RenderWindow &Vent){
 	Vent.clear(Color(0,0,0,255));
 	Vent.draw(*FondoE);

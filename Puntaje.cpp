@@ -177,6 +177,7 @@ void Puntaje::Dibujar (RenderWindow & Vent) {
 	Vent.display();
 }
 
+
 //Guardo los puntos
 Puntaje::~Puntaje() {
 	Puntos aux;

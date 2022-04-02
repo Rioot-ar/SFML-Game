@@ -48,6 +48,7 @@ JefeFinal::JefeFinal(Vector2f pos,char Dificultad) {
 	TInformacion->setFont(*fuente);	
 }
 
+
 ///Cada 15 segundos el Jefe hace un ataque poderoso y se teletransporta, HabilidadEsp verifica el tiempo
 void JefeFinal::habilidadEspecial ( ) {
 	if(HabilidadEsp.getElapsedTime().asSeconds()>=15){

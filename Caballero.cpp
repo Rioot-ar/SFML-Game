@@ -45,7 +45,7 @@ void Caballero::habilidadEspecial ( ) {
 			Salud=9999;
 			habilidadActivada=true;
 			HAbInven.restart();
-			PuntosdHabilidad=0;
+			PuntosdHabilidad-=1;
 		}
 		
 	}
@@ -156,12 +156,13 @@ Text Caballero::Informacion (unsigned TV ) {
 	if(habilidadActivada){
 		aux+="\nTiempo de habilidad restante: "+to_string(5-(int)HAbInven.getElapsedTime().asSeconds());
 	}
-	TInformacion->setCharacterSize(TV*0.02);
+	TInformacion->setCharacterSize(TV*0.015);
 	TInformacion->setString(aux);
-	TInformacion->setPosition(m_sprite.getPosition().x-TV/2.f,0.f);
+	TInformacion->setPosition(m_sprite.getPosition().x-TV/2.f,10.f);
 	
 	return *TInformacion;
 }
+
 
 Caballero::~Caballero ( ) {
 	

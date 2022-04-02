@@ -4,7 +4,6 @@
 #include "Juego.h"
 
 
-
 class SeleccionDePersonaje : public Escena{
 public:
 	SeleccionDePersonaje();

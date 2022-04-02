@@ -231,6 +231,7 @@ void SeleccionDePersonaje::Actualizar(Juego &game){
 		}
 }
 	}
+
 void SeleccionDePersonaje::Dibujar(RenderWindow &Vent){
 	
 	Vent.clear(Color(0,0,0,255));

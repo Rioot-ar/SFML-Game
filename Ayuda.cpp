@@ -107,7 +107,6 @@ void Ayuda::Dibujar (RenderWindow & Vent) {
 	Vent.display();
 }
 
-
 Ayuda::~Ayuda ( ) {
 	
 }

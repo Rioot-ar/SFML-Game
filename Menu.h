@@ -2,6 +2,7 @@
 #define MENU_H
 #include "Juego.h"
 
+
 class Menu : public Escena{
 public:
 	Menu();

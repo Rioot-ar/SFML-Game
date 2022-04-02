@@ -30,10 +30,10 @@ Cazador::Cazador() {
 	Posicion=m_sprite.getPosition();
 	Salud = 75;
 	Defensa = 3;
-	Danio = 10;
 	Salto = 6;
 	puntos=0;
 	PuntosdHabilidad = 1;
+	Danio = 10;
 	VelProyectil=10;
 	VelocidadAtaque=1;
 	habilidadActivada=false;
@@ -49,7 +49,7 @@ void Cazador::habilidadEspecial ( ) {
 	if(PuntosdHabilidad){
 		if(Keyboard::isKeyPressed(Keyboard::Key::Q)){
 			VelocidadAtaque=0.5;
-			VelProyectil=20;
+			VelProyectil=30;
 			habilidadActivada=true;
 			HAbInven.restart();
 			PuntosdHabilidad=0;
@@ -62,6 +62,7 @@ void Cazador::habilidadEspecial ( ) {
 		habilidadActivada=false;
 	}
 }
+
 
 void Cazador::Movimiento ( ) {
 	
@@ -149,9 +150,9 @@ Text Cazador::Informacion (unsigned TV ) {
 		aux+="\nTiempo de habilidad restante: "+to_string(5-(int)HAbInven.getElapsedTime().asSeconds());
 	}
 	
-	TInformacion->setCharacterSize(TV*0.02);
+	TInformacion->setCharacterSize(TV*0.015);
 	TInformacion->setString(aux);
-	TInformacion->setPosition(m_sprite.getPosition().x-TV/2.f,0.f);
+	TInformacion->setPosition(m_sprite.getPosition().x-TV/2.f,10.f);
 	
 	return *TInformacion;
 }

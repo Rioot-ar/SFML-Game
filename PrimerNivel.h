@@ -6,6 +6,7 @@ public:
 	PrimerNivel(char SDificultad, char SPersonaje);
 	void TerminarPartida(Juego & game) override;
 private:
+	
 };
 
 #endif

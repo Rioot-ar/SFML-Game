@@ -7,6 +7,7 @@ public:
 	SegundoNivel(char SDificultad, Personaje* J);
 	void TerminarPartida(Juego & game) override;
 private:
+	
 };
 
 #endif

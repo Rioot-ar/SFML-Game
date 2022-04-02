@@ -29,6 +29,7 @@ Asesino::Asesino(Vector2f pos) {
 }
 
 
+
 Asesino::~Asesino ( ) {
 	
 }

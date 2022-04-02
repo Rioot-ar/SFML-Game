@@ -1,7 +1,7 @@
 #include "Juego.h"
 #include <SFML/Graphics.hpp>
 #include "Menu.h"
-#include "Escena.h"
+
 using namespace std;
 using namespace sf;
 Juego::Juego() : Ventana(VideoMode(800,600),"Kingdom"){
@@ -9,6 +9,7 @@ Juego::Juego() : Ventana(VideoMode(800,600),"Kingdom"){
 	Actual = new Menu;
 	m_siguiente_escena = nullptr;
 }
+
 void Juego::Run(){
 	while(Ventana.isOpen()) {
 		
@@ -26,12 +27,13 @@ void Juego::Run(){
 			Actual=m_siguiente_escena;
 			m_siguiente_escena= nullptr;
 		}
-
 	}
 }
+
 void Juego::SetEscena(Escena *nueva){
 	m_siguiente_escena=nueva;
 }
+
 Juego::~Juego(){
 	delete Actual;
 	delete m_siguiente_escena;

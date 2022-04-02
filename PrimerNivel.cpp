@@ -128,7 +128,6 @@ PrimerNivel::PrimerNivel(char SDificultad, char SPersonaje) {
 }
 
 
-
 void PrimerNivel::TerminarPartida (Juego & game) {
 	//Final 1, el jugador termino el nivel. Final 2 el jugador murio
 	if(Jugador->ObtenerSalud()>0){

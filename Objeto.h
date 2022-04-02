@@ -2,7 +2,6 @@
 #define OBJETO_H
 #include <SFML/Graphics.hpp>
 
-
 class Objeto {
 public:
 	Objeto();

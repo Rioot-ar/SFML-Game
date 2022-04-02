@@ -2,6 +2,7 @@
 #define AYUDA_H
 #include "Escena.h"
 
+
 class Ayuda : public Escena {
 public:
 	Ayuda();

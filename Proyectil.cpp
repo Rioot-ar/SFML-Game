@@ -28,6 +28,7 @@ Proyectil::Proyectil(float R, Texture* T,Vector2f V,Vector2f Pi,float D){
 
 }
 
+
 void Proyectil::Movimiento ( ) {
 	//Si m_rango==0 solo tengo que girar el proyectil, no moverlo.
 	if(m_rango==0){

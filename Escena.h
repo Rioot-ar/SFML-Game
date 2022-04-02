@@ -3,6 +3,7 @@
 #include "Juego.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+
 class Juego;
 
 class Escena {

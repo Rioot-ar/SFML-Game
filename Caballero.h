@@ -2,6 +2,7 @@
 #define CABALLERO_H
 #include "Personaje.h"
 
+
 class Caballero : public Personaje {
 public:
 	Caballero();

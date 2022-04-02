@@ -2,6 +2,7 @@
 #define JEFEFINAL_H
 #include "Enemigos.h"
 
+
 class JefeFinal : public Enemigos {
 public:
 	JefeFinal(sf::Vector2f Posicion, char Dificultad);

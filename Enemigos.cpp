@@ -11,7 +11,7 @@ Enemigos::Enemigos(){
 //Per es la posicion del Jugador
 void Enemigos::VerificarDist (Vector2f Per) {
 	
-	//Pitagoras para la distancia
+	//Distancia
 	DistAPers=sqrt(pow(Per.x-m_sprite.getPosition().x,2)+pow(Per.y-m_sprite.getPosition().y,2));
 	
 	//Verifica si el Jugador esta a la vista
@@ -36,12 +36,17 @@ bool Enemigos::Atacar ( ) {
 			Vector2f MovProyectil=CalcularVelocidad(Pendiente,VelProyectil,DirecionX);// Calcula velocidad del proyectil
 			m_proyectil=Proyectil(RangoAtaque,m_ataque,Vector2f(MovProyectil),Vector2f(m_sprite.getPosition().x+2,m_sprite.getPosition().y),Danio);
 			//Animacion de ataque
-			if(DirecionX>0){m_sprite.setTextureRect(IntRect(86,0,86,109));}else{m_sprite.setTextureRect(IntRect(86*4,109,86,109));}
+			if(DirecionX>0){
+				m_sprite.setTextureRect(IntRect(86,0,86,109));
+			}else{
+				m_sprite.setTextureRect(IntRect(86*4,109,86,109));
+			}
 			return true;
 		}
 		
 	}else{return false;}
 }
+
 void Enemigos::Movimiento(){
 	
 	//Simpre que el personaje este a la vista y su rango de ataque no sea suficiente se mueve hacia el Jugador

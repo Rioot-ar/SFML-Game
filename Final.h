@@ -3,6 +3,7 @@
 #include "Niveles.h"
 
 
+
 class Final : public Niveles {
 public:
 	Final(char SDificultad, Personaje* J);

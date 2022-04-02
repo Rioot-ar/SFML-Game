@@ -140,14 +140,15 @@ void Mago::VerificarDist (Vector2f Per) {
 	
 }
 
+
 //Informacion que se muestra en en la pantalla de los niveles
 Text Mago::Informacion (unsigned TV ) {
 	
 	string aux;
 	aux="Vida: "+to_string((int)Salud)+"\nPuntos de habilidad: "+to_string(PuntosdHabilidad);
-	TInformacion->setCharacterSize(TV*0.02);
+	TInformacion->setCharacterSize(TV*0.015);
 	TInformacion->setString(aux);
-	TInformacion->setPosition(m_sprite.getPosition().x-TV/2.f,0.f);
+	TInformacion->setPosition(m_sprite.getPosition().x-TV/2.f,10.f);
 	
 	return *TInformacion;
 }

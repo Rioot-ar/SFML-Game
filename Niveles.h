@@ -8,7 +8,6 @@
 #include <list>
 #include "Enemigos.h"
 
-
 class Niveles : public Escena {
 public:
 	Niveles(char SDificultad, char SPersonaje);

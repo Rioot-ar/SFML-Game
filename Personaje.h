@@ -9,7 +9,6 @@
 #include <SFML/Audio.hpp>
 
 
-
 class Personaje {
 public:
 	Personaje();
@@ -25,7 +24,10 @@ public:
 	float ObtenerSalud()const{return Salud;}
 	virtual ~Personaje();
 	virtual void VerificarDist(sf::Vector2f Per);
-	void VolverInicio(){m_sprite.setPosition(70,200);Posicion=m_sprite.getPosition();}
+	void VolverInicio(){
+		m_sprite.setPosition(70,200);
+		Posicion=m_sprite.getPosition();
+	}
 	int &consultarPuntos(){return puntos;}
 	sf::Vector2f CalcularVelocidad(float Pend, float VELP,int DIR);
 	virtual sf::Text Informacion(unsigned TV);

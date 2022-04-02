@@ -67,6 +67,7 @@ Final::Final(char SDificultad, Personaje* J) {
 }
 
 
+
 void Final::TerminarPartida (Juego & game) {
 	//Final 1, el jugador mato al Jefe. Final 2 el jugador murio
 	if(Jugador->ObtenerSalud()>0){

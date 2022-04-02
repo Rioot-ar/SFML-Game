@@ -19,5 +19,6 @@ private:
 	sf::Texture* AtaqueEspecial;
 };
 
+
 #endif
 

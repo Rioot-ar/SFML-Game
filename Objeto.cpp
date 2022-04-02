@@ -6,6 +6,7 @@ Objeto::~Objeto() {
 }
 
 
+
 Objeto::Objeto ( ) {
 	
 }

@@ -2,6 +2,7 @@
 #define ENEMIGOS_H
 #include "Personaje.h"
 
+
 class Enemigos : public Personaje {
 public:
 	Enemigos();
